@@ -1,0 +1,101 @@
+Cliente;TipoCliente;CantidadArticulos;TotalUSD;Tarjeta;Genero;EstadoCivil;Edad
+1;Regular;1;39,50;Diners Club;Mujer;Casado;32
+2;Promocional;1;102,40;American Express;Hombre;Casado;36
+3;Regular;1;22,50;American Express;Hombre;Casado;32
+4;Promocional;5;100,40;American Express;Hombre;Casado;28
+5;Regular;2;54,00;MasterCard;Hombre;Casado;34
+6;Regular;1;44,50;MasterCard;Hombre;Casado;44
+7;Promocional;2;78,00;American Express;Hombre;Casado;30
+8;Regular;1;22,50;Visa;Hombre;Casado;40
+9;Promocional;2;56,52;American Express;Hombre;Casado;46
+10;Regular;1;44,50;American Express;Hombre;Casado;36
+11;Regular;1;29,50;American Express;Hombre;Casado;48
+12;Promocional;1;31,60;American Express;Hombre;Casado;40
+13;Promocional;9;160,40;Visa;Hombre;Casado;40
+14;Promocional;2;64,50;Visa;Hombre;Casado;46
+15;Regular;1;49,50;Visa;Mujer;Soltero;24
+16;Promocional;2;71,40;American Express;Mujer;Soltero;36
+17;Promocional;3;94,00;American Express;Hombre;Soltero;22
+18;Regular;3;54,50;Diners Club;Hombre;Casado;40
+19;Promocional;2;38,50;MasterCard;Hombre;Casado;32
+20;Promocional;6;44,80;American Express;Hombre;Casado;56
+21;Promocional;1;31,60;American Express;Hombre;Soltero;28
+22;Promocional;4;70,82;American Express;Hombre;Casado;38
+23;Promocional;7;266,00;American Express;Hombre;Casado;50
+24;Regular;2;74,00;American Express;Hombre;Casado;42
+25;Promocional;2;39,50;Visa;Mujer;Casado;48
+26;Promocional;1;30,02;American Express;Hombre;Casado;60
+27;Regular;1;44,50;American Express;Hombre;Casado;54
+28;Promocional;5;192,80;American Express;Hombre;Soltero;42
+29;Promocional;3;71,20;American Express;Hombre;Casado;32
+30;Promocional;1;18,00;American Express;Hombre;Casado;70
+31;Promocional;2;63,20;MasterCard;Hombre;Casado;28
+32;Regular;1;75,00;American Express;Hombre;Casado;52
+33;Promocional;3;63,20;American Express;Hombre;Casado;44
+34;Regular;1;40,00;American Express;Hombre;Casado;34
+35;Promocional;5;105,50;MasterCard;Hombre;Casado;56
+36;Regular;1;29,50;MasterCard;Mujer;Soltero;36
+37;Regular;2;102,50;Visa;Hombre;Soltero;42
+38;Promocional;6;117,50;American Express;Hombre;Casado;50
+39;Promocional;5;13,23;American Express;Hombre;Casado;44
+40;Regular;2;52,50;American Express;Hombre;Casado;58
+41;Promocional;13;198,80;American Express;Hombre;Casado;42
+42;Promocional;4;19,50;Visa;Hombre;Casado;46
+43;Regular;2;123,50;American Express;Hombre;Casado;48
+44;Promocional;1;62,40;American Express;Hombre;Casado;54
+45;Promocional;2;23,80;American Express;Hombre;Casado;38
+46;Promocional;2;39,60;American Express;Hombre;Casado;60
+47;Regular;1;25,00;MasterCard;Hombre;Casado;46
+48;Promocional;3;63,64;American Express;Hombre;Casado;30
+49;Promocional;1;14,82;American Express;Hombre;Casado;32
+50;Promocional;9;145,20;MasterCard;Hombre;Casado;46
+51;Promocional;6;176,62;American Express;Hombre;Casado;38
+52;Promocional;5;118,80;American Express;Mujer;Casado;68
+53;Regular;1;58,00;Diners Club;Hombre;Soltero;78
+54;Regular;2;74,00;Visa;Hombre;Soltero;20
+55;Regular;2;49,50;MasterCard;Hombre;Casado;32
+56;Promocional;3;141,60;American Express;Hombre;Casado;38
+57;Promocional;6;123,10;American Express;Hombre;Casado;54
+58;Promocional;2;80,40;American Express;Hombre;Casado;48
+59;Promocional;4;65,20;MasterCard;Hombre;Casado;46
+60;Promocional;4;113,00;American Express;Hombre;Soltero;50
+61;Promocional;1;108,80;American Express;Hombre;Casado;46
+62;Promocional;3;59,91;American Express;Hombre;Soltero;30
+63;Promocional;5;53,60;American Express;Hombre;Casado;54
+64;Promocional;1;31,60;American Express;Hombre;Soltero;42
+65;Promocional;2;49,50;American Express;Hombre;Casado;48
+66;Promocional;1;39,60;American Express;Hombre;Casado;62
+67;Promocional;2;59,50;American Express;Hombre;Casado;34
+68;Promocional;5;146,80;American Express;Hombre;Casado;28
+69;Promocional;2;47,20;American Express;Mujer;Casado;46
+70;Promocional;8;95,05;American Express;Hombre;Casado;54
+71;Promocional;5;155,32;American Express;Hombre;Casado;30
+72;Promocional;4;58,00;MasterCard;Hombre;Casado;32
+73;Regular;1;69,00;American Express;Hombre;Soltero;22
+74;Promocional;2;46,50;American Express;Hombre;Casado;32
+75;Promocional;2;45,22;American Express;Hombre;Casado;74
+76;Promocional;4;84,74;American Express;Hombre;Casado;62
+77;Regular;2;39,00;American Express;Hombre;Casado;42
+78;Promocional;4;111,14;American Express;Hombre;Casado;28
+79;Promocional;3;86,80;American Express;Hombre;Casado;38
+80;Regular;2;89,00;Diners Club;Hombre;Casado;54
+81;Promocional;2;78,00;MasterCard;Hombre;Casado;68
+82;Promocional;6;53,20;American Express;Hombre;Soltero;30
+83;Promocional;4;58,50;Visa;Hombre;Casado;36
+84;Promocional;3;46,00;American Express;Hombre;Casado;44
+85;Regular;2;37,50;Visa;Hombre;Casado;44
+86;Promocional;1;20,80;American Express;Hombre;Casado;62
+87;Regular;6;144,00;MasterCard;Hombre;Soltero;48
+88;Regular;4;107,00;American Express;Hombre;Casado;36
+89;Promocional;1;31,60;American Express;Hombre;Soltero;20
+90;Promocional;6;57,60;American Express;Hombre;Casado;42
+91;Promocional;4;95,20;American Express;Hombre;Casado;54
+92;Promocional;1;22,42;American Express;Hombre;Casado;54
+93;Regular;5;159,75;American Express;Hombre;Casado;72
+94;Promocional;17;229,50;American Express;Hombre;Casado;30
+95;Regular;3;66,00;American Express;Hombre;Casado;46
+96;Regular;1;39,50;MasterCard;Hombre;Casado;44
+97;Promocional;9;253,00;American Express;Hombre;Casado;30
+98;Promocional;10;287,59;American Express;Hombre;Casado;52
+99;Promocional;2;47,60;American Express;Hombre;Casado;30
+100;Promocional;1;28,44;American Express;Hombre;Casado;44
