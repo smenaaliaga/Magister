@@ -12,168 +12,189 @@ library(corrplot)
 ## TRANSFORMACION DE DATOS ##
 #############################
 
-original <- read.csv2("Base_T1_Modif.csv")
+original <- read.csv2("Base_T1_modif.csv")
 
 data <- original %>%
      select(
-         id = Id_Atenci.n,
-         fecha = Fecha,
-         turno = Turno,
-         delta_1 = deltaMinuto1,
-         respon_2 = Responsable,
+         tiempo_1 = delta_1,
+         tiempo_2 = delta_2,
+         responsable = Responsable,
          tipo_carga = Tipo_carga,
-         delta_2 = deltafecha2,
-         delta_3 = SUMA_ATENCION_O1_delta_3,
-         respon_3 = Responsable_O1,
-         delta_4 = Min_Atenci.n_O2_delta_4,
-         respon_4 = Responsable_O2,
-         delta_5 = Min_port_salida_delta_5
+         tiempo_3 = delta_3,
+         responsable_O1 = Responsable_O1,
+         tiempo_4 = delta_4,
+         responsable_O2 = Responsable_O2,
+         tiempo_5 = delta_5
          ) 
 
-# SE CONVIERTEN LOS deltas EN NUMERICOS
+# SE CONVIERTEN LOS tiempos EN NUMERICOS
 data <- data %>% mutate(
-       delta_1 = as.numeric(delta_1),
-       delta_2 = as.numeric(delta_2),
-       delta_3 = as.numeric(delta_3),
-       delta_4 = as.numeric(delta_4),
-       delta_5 = as.numeric(delta_5),
-       tipo_carga = as.factor(tipo_carga)
+       tiempo_1 = as.numeric(tiempo_1),
+       tiempo_2 = as.numeric(tiempo_2),
+       tiempo_3 = as.numeric(tiempo_3),
+       tiempo_4 = as.numeric(tiempo_4),
+       tiempo_5 = as.numeric(tiempo_5),
+       tipo_carga = as.factor(tipo_carga),
+       responsable = as.factor(responsable),
+       responsable_O1 = as.factor(responsable_O1),
+       responsable_O2 = as.factor(responsable_O2),
      )
 
-deltas <- data %>% select(delta_1, delta_2, delta_3, delta_4, delta_5)
-
-# ?melt
-deltas_fact <- melt(deltas)
-
-####################################
-## ANALISIS EXPLORATORIO DE DATOS ##
-####################################
+################
+## Pregunta 1 ##
+################
 # ?ggplot
 
-#### BOXPLOT DELTAS
-ggplot(data = deltas_fact, 
-      mapping = aes(variable, value, colour = variable)) +
-      geom_boxplot(outlier.shape=NA, size = 1) +
-      theme_minimal() +
-      theme(legend.position = "none") +
-      xlab("Deltas") + ylab("Minutos") +
-      ylim(0,84)
-
-summary(deltas)
-
-boxplot(deltas, ylim=c(0,65))
-
-#### DELTA 1
+#### tiempo 1
 # resumen
-summary(deltas$delta_1)
-quantile(deltas$delta_1)
-sd(deltas$delta_1)
-sd(deltas$delta_1)/mean(deltas$delta_1)
+summary(tiempos$tiempo_1)
+quantile(tiempos$tiempo_1)
+sd(tiempos$tiempo_1)
+sd(tiempos$tiempo_1)/mean(tiempos$tiempo_1)
 
 # outliers
-boxplot(deltas$delta_1, plot=FALSE)$out
+boxplot(data$tiempo_1, plot=FALSE)$out
 
-# boxplot
-ceiling(1 + 3.322 * log10(length(deltas$delta_1)))
-ggplot(deltas, aes(delta_1)) +
+# boxplot sin correcion de NA
+ceiling(1 + 3.322 * log10(length(data$tiempo_1)))
+
+ggplot(data, aes(data$tiempo_1)) +
   geom_histogram(bins = 12, color="white", boundary=0) +
   xlab("Tiempos [minuto]") + ylab("Frecuencia") +
   theme_minimal() +
   xlim(0,7.5)
 
-# test normalidad
-ks.test(x = deltas$delta_1,"pnorm", mean(deltas$delta_1), sd(deltas$delta_1))
+# correción NA #?mean
+data_corr <- data %>% 
+  mutate(tiempo_1 = replace_na(tiempo_1,median(data$tiempo_1, na.rm = TRUE)))
 
+# boxplot con correcion de NA
+ggplot(data_corr, aes(data_corr$tiempo_1)) +
+  geom_histogram(bins = 12, color="white", boundary=0) +
+  xlab("Tiempos [minuto]") + ylab("Frecuencia") +
+  theme_minimal() +
+  xlim(0,7.5)
 
-#### DELTA 2
 # resumen
-summary(deltas$delta_2)
-quantile(deltas$delta_2)
-sd(deltas$delta_2)
-sd(deltas$delta_2)/mean(deltas$delta_2)
+summary(data_corr$tiempo_1)
+quantile(data_corr$tiempo_1)
+sd(data_corr$tiempo_1)
+sd(data_corr$tiempo_1)/mean(data_corr$tiempo_1)
+
+
+# test normalidad
+ks.test(x = tiempos$tiempo_1,"pnorm", mean(tiempos$tiempo_1), sd(tiempos$tiempo_1))
+
+
+#### tiempo 2
+# resumen
+summary(tiempos$tiempo_2)
+quantile(tiempos$tiempo_2)
+sd(tiempos$tiempo_2)
+sd(tiempos$tiempo_2)/mean(tiempos$tiempo_2)
 
 # outliers
-boxplot(deltas$delta_2, plot=FALSE)$out
+boxplot(tiempos$tiempo_2, plot=FALSE)$out
 
 # boxplot
-ceiling(1 + 3.322 * log10(length(deltas$delta_2)))
-ggplot(deltas, aes(delta_2)) +
+ceiling(1 + 3.322 * log10(length(tiempos$tiempo_2)))
+ggplot(tiempos, aes(tiempo_2)) +
   geom_histogram(bins = 12, color="white", boundary=0) +
   xlab("Tiempos [minuto]") + ylab("Frecuencia") +
   theme_minimal() +
   xlim(0,5)
 
 #test normalidad
-ks.test(x = deltas$delta_2,"pnorm", mean(deltas$delta_2), sd(deltas$delta_2))
+ks.test(x = tiempos$tiempo_2,"pnorm", mean(tiempos$tiempo_2), sd(tiempos$tiempo_2))
 
 
-#### DELTA 3
+#### tiempo 3
 # resumen
-summary(deltas$delta_3)
-quantile(deltas$delta_3)
-sd(deltas$delta_3)
-sd(deltas$delta_3)/mean(deltas$delta_3)
+summary(tiempos$tiempo_3)
+quantile(tiempos$tiempo_3)
+sd(tiempos$tiempo_3)
+sd(tiempos$tiempo_3)/mean(tiempos$tiempo_3)
 
 # outliers
-boxplot(deltas$delta_3, plot=FALSE)$out
+boxplot(tiempos$tiempo_3, plot=FALSE)$out
 
 # boxplot
-ceiling(1 + 3.322 * log10(length(deltas$delta_3)))
-ggplot(deltas, aes(delta_3)) +
+ceiling(1 + 3.322 * log10(length(tiempos$tiempo_3)))
+ggplot(tiempos, aes(tiempo_3)) +
   geom_histogram(bins = 12, color="white", boundary=0) +
   xlab("Tiempos [minuto]") + ylab("Frecuencia") +
   theme_minimal() 
 
 # test normalidad
-ks.test(x = deltas$delta_3, "pnorm", mean(deltas$delta_3), sd(deltas$delta_3))
+ks.test(x = tiempos$tiempo_3, "pnorm", mean(tiempos$tiempo_3), sd(tiempos$tiempo_3))
 
 
 
-#### DELTA 4
-summary(deltas$delta_4)
-quantile(deltas$delta_4)
-sd(deltas$delta_4)
-sd(deltas$delta_4)/mean(deltas$delta_4)
+#### tiempo 4
+summary(tiempos$tiempo_4)
+quantile(tiempos$tiempo_4)
+sd(tiempos$tiempo_4)
+sd(tiempos$tiempo_4)/mean(tiempos$tiempo_4)
 
 # outliers
-boxplot(deltas$delta_4, plot=FALSE)$out
+boxplot(tiempos$tiempo_4, plot=FALSE)$out
 
 # boxplot
-ceiling(1 + 3.322 * log10(length(deltas$delta_4)))
-ggplot(deltas, aes(delta_4)) +
+ceiling(1 + 3.322 * log10(length(tiempos$tiempo_4)))
+ggplot(tiempos, aes(tiempo_4)) +
   geom_histogram(bins = 12, color="white", boundary=0) +
   xlab("Tiempos [minuto]") + ylab("Frecuencia") +
   theme_minimal() 
 
 # test normalidad
-ks.test(x = deltas$delta_4, "pnorm", mean(deltas$delta_4), sd(deltas$delta_4))
+ks.test(x = tiempos$tiempo_4, "pnorm", mean(tiempos$tiempo_4), sd(tiempos$tiempo_4))
 
 
 
 
-#### DELTA 5
-summary(deltas$delta_5)
-quantile(deltas$delta_5)
-sd(deltas$delta_5)
-sd(deltas$delta_5)/mean(deltas$delta_5)
+#### tiempo 5
+summary(tiempos$tiempo_5)
+quantile(tiempos$tiempo_5)
+sd(tiempos$tiempo_5)
+sd(tiempos$tiempo_5)/mean(tiempos$tiempo_5)
 
 # outliers
-boxplot(deltas$delta_5, plot=FALSE)$out
+boxplot(tiempos$tiempo_5, plot=FALSE)$out
 
 # boxplot
-ceiling(1 + 3.322 * log10(length(deltas$delta_5)))
-ggplot(deltas, aes(delta_5)) +
+ceiling(1 + 3.322 * log10(length(tiempos$tiempo_5)))
+ggplot(tiempos, aes(tiempo_5)) +
   geom_histogram(bins = 12, color="white", boundary=0) +
   xlab("Tiempos [minuto]") + ylab("Frecuencia") +
   theme_minimal() 
 
 # test normalidad
-ks.test(x = deltas$delta_5, "pnorm", mean(deltas$delta_5), sd(deltas$delta_5))
+ks.test(x = tiempos$tiempo_5, "pnorm", mean(tiempos$tiempo_5), sd(tiempos$tiempo_5))
 
 
-#### TEST WILCOXON DE MEDIANAS PARA DELTA 1 Y 5
+#### BOXPLOT para tiempos
+tiempos <- data %>% select(tiempo_1, tiempo_2, tiempo_3, tiempo_4, tiempo_5)
 
-wilcox.test(x = deltas$delta_1, y = deltas$delta_5, 
+# ?melt
+tiempos_fact <- melt(tiempos)
+
+ggplot(data = tiempos_fact, 
+       mapping = aes(variable, value, colour = variable)) +
+  geom_boxplot(outlier.shape=NA, size = 1) +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  xlab("tiempos") + ylab("Minutos") +
+  ylim(0,84)
+
+summary(tiempos)
+
+boxplot(tiempos, ylim=c(0,65))
+
+
+
+#### TEST WILCOXON DE MEDIANAS PARA tiempo 1 Y 5
+
+wilcox.test(x = tiempos$tiempo_1, y = tiempos$tiempo_5, 
             alternative = "two.sided", mu = 0, paired = F,
             conf.int = 0.95)
 
@@ -184,26 +205,26 @@ wilcox.test(x = deltas$delta_1, y = deltas$delta_5,
 ## PREGUNTA 2 ##
 ################
 
-### delta 2
+### tiempo 2
 
 # test turno 1
-tuno1_delta2 <- data %>% filter(turno == 'T1') %>% select(delta_2)
-ks.test(x = tuno1_delta2$delta_2, "pnorm", 
-        mean(tuno1_delta2$delta_2), sd(tuno1_delta2$delta_2))
+tuno1_tiempo2 <- data %>% filter(turno == 'T1') %>% select(tiempo_2)
+ks.test(x = tuno1_tiempo2$tiempo_2, "pnorm", 
+        mean(tuno1_tiempo2$tiempo_2), sd(tuno1_tiempo2$tiempo_2))
 
 # test turno 2
-tuno2_delta2 <- data %>% filter(turno == 'T2') %>% select(delta_2)
-ks.test(x = tuno2_delta2$delta_2, "pnorm", 
-        mean(tuno2_delta2$delta_2), sd(tuno2_delta2$delta_2))
+tuno2_tiempo2 <- data %>% filter(turno == 'T2') %>% select(tiempo_2)
+ks.test(x = tuno2_tiempo2$tiempo_2, "pnorm", 
+        mean(tuno2_tiempo2$tiempo_2), sd(tuno2_tiempo2$tiempo_2))
 
 # test turno 1
-tuno3_delta2 <- data %>% filter(turno == 'T3') %>% select(delta_2)
-ks.test(x = tuno3_delta2$delta_2, "pnorm", 
-        mean(tuno3_delta2$delta_2), sd(tuno3_delta2$delta_2))
+tuno3_tiempo2 <- data %>% filter(turno == 'T3') %>% select(tiempo_2)
+ks.test(x = tuno3_tiempo2$tiempo_2, "pnorm", 
+        mean(tuno3_tiempo2$tiempo_2), sd(tuno3_tiempo2$tiempo_2))
 
 # boxplots
 ggplot(data = data, 
-       mapping = aes(turno, delta_2, colour = turno)) +
+       mapping = aes(turno, tiempo_2, colour = turno)) +
   geom_boxplot(outlier.shape=NA, size = 1) +
   theme_minimal() +
   theme(legend.position = "none") +
@@ -211,17 +232,17 @@ ggplot(data = data,
   ylim(0,3.2)
 
 # turno 1 y 2
-wilcox.test(x = tuno1_delta2$delta_2, y = tuno2_delta2$delta_2, 
+wilcox.test(x = tuno1_tiempo2$tiempo_2, y = tuno2_tiempo2$tiempo_2, 
             alternative = "two.sided", mu = 0, paired = F,
             conf.int = 0.95)
 
 # turno 1 y 3
-wilcox.test(x = tuno1_delta2$delta_2, y = tuno3_delta2$delta_2, 
+wilcox.test(x = tuno1_tiempo2$tiempo_2, y = tuno3_tiempo2$tiempo_2, 
             alternative = "two.sided", mu = 0, paired = F,
             conf.int = 0.95)
 
 # turno 2 y 3
-wilcox.test(x = tuno2_delta2$delta_2, y = tuno3_delta2$delta_2, 
+wilcox.test(x = tuno2_tiempo2$tiempo_2, y = tuno3_tiempo2$tiempo_2, 
             alternative = "two.sided", mu = 0, paired = F,
             conf.int = 0.95)
 
@@ -230,7 +251,7 @@ wilcox.test(x = tuno2_delta2$delta_2, y = tuno3_delta2$delta_2,
 ## PREGUNTA 4 ##
 ################
 
-table(data$tipo_carga, data$delta_1)
+table(data$tipo_carga, data$tiempo_1)
 
 tbl <- table(data$turno, data$tipo_carga)
 prop.table(tbl)
@@ -246,74 +267,74 @@ chisq.test(x = tbl)
 ################
 
 #### Alimento no perecible
-categ_alimentos_delta <- data %>% 
+categ_alimentos_tiempo <- data %>% 
   filter(tipo_carga == 'Alimentos no perecibles') %>% 
-  select(delta_2, delta_3, delta_4)
+  select(tiempo_2, tiempo_3, tiempo_4)
 
-# delta 2
-median(categ_alimentos_delta$delta_2)
-# delta 3
-median(categ_alimentos_delta$delta_3)
-# delta 4
-median(categ_alimentos_delta$delta_4)
+# tiempo 2
+median(categ_alimentos_tiempo$tiempo_2)
+# tiempo 3
+median(categ_alimentos_tiempo$tiempo_3)
+# tiempo 4
+median(categ_alimentos_tiempo$tiempo_4)
 
 
 #### Medicamentos
-categ_medic_delta <- data %>% 
+categ_medic_tiempo <- data %>% 
   filter(tipo_carga == 'Medicamentos') %>% 
-  select(delta_2, delta_3, delta_4)
+  select(tiempo_2, tiempo_3, tiempo_4)
 
-# delta 2
-median(categ_medic_delta$delta_2)
-# delta 3
-median(categ_medic_delta$delta_3)
-# delta 4
-median(categ_medic_delta$delta_4)
+# tiempo 2
+median(categ_medic_tiempo$tiempo_2)
+# tiempo 3
+median(categ_medic_tiempo$tiempo_3)
+# tiempo 4
+median(categ_medic_tiempo$tiempo_4)
 
 #### Texto
-categ_texto_delta <- data %>% 
+categ_texto_tiempo <- data %>% 
   filter(tipo_carga == 'Textos ') %>% 
-  select(delta_2, delta_3, delta_4)
+  select(tiempo_2, tiempo_3, tiempo_4)
 
-# delta 2
-median(categ_texto_delta$delta_2)
-# delta 3
-median(categ_texto_delta$delta_3)
-# delta 4
-median(categ_texto_delta$delta_4)
+# tiempo 2
+median(categ_texto_tiempo$tiempo_2)
+# tiempo 3
+median(categ_texto_tiempo$tiempo_3)
+# tiempo 4
+median(categ_texto_tiempo$tiempo_4)
 
 
-#### Test Wilcoxon --- Delta 2
-wilcox.test(x = categ_alimentos_delta$delta_2, y = categ_medic_delta$delta_2, 
+#### Test Wilcoxon --- tiempo 2
+wilcox.test(x = categ_alimentos_tiempo$tiempo_2, y = categ_medic_tiempo$tiempo_2, 
             alternative = "two.sided", mu = 0, paired = F,
             conf.int = 0.95)
-wilcox.test(x = categ_alimentos_delta$delta_2, y = categ_texto_delta$delta_2, 
+wilcox.test(x = categ_alimentos_tiempo$tiempo_2, y = categ_texto_tiempo$tiempo_2, 
             alternative = "two.sided", mu = 0, paired = F,
             conf.int = 0.95)
-wilcox.test(x = categ_medic_delta$delta_2, y = categ_texto_delta$delta_2, 
-            alternative = "two.sided", mu = 0, paired = F,
-            conf.int = 0.95)
-
-#### Test Wilcoxon --- Delta 3
-wilcox.test(x = categ_alimentos_delta$delta_3, y = categ_medic_delta$delta_3, 
-            alternative = "two.sided", mu = 0, paired = F,
-            conf.int = 0.95)
-wilcox.test(x = categ_alimentos_delta$delta_3, y = categ_texto_delta$delta_3, 
-            alternative = "two.sided", mu = 0, paired = F,
-            conf.int = 0.95)
-wilcox.test(x = categ_medic_delta$delta_3, y = categ_texto_delta$delta_3, 
+wilcox.test(x = categ_medic_tiempo$tiempo_2, y = categ_texto_tiempo$tiempo_2, 
             alternative = "two.sided", mu = 0, paired = F,
             conf.int = 0.95)
 
+#### Test Wilcoxon --- tiempo 3
+wilcox.test(x = categ_alimentos_tiempo$tiempo_3, y = categ_medic_tiempo$tiempo_3, 
+            alternative = "two.sided", mu = 0, paired = F,
+            conf.int = 0.95)
+wilcox.test(x = categ_alimentos_tiempo$tiempo_3, y = categ_texto_tiempo$tiempo_3, 
+            alternative = "two.sided", mu = 0, paired = F,
+            conf.int = 0.95)
+wilcox.test(x = categ_medic_tiempo$tiempo_3, y = categ_texto_tiempo$tiempo_3, 
+            alternative = "two.sided", mu = 0, paired = F,
+            conf.int = 0.95)
 
-#### Test Wilcoxon --- Delta 4
-wilcox.test(x = categ_alimentos_delta$delta_4, y = categ_medic_delta$delta_4, 
+
+#### Test Wilcoxon --- tiempo 4
+wilcox.test(x = categ_alimentos_tiempo$tiempo_4, y = categ_medic_tiempo$tiempo_4, 
             alternative = "two.sided", mu = 0, paired = F,
             conf.int = 0.95)
-wilcox.test(x = categ_alimentos_delta$delta_4, y = categ_texto_delta$delta_4, 
+wilcox.test(x = categ_alimentos_tiempo$tiempo_4, y = categ_texto_tiempo$tiempo_4, 
             alternative = "two.sided", mu = 0, paired = F,
             conf.int = 0.95)
-wilcox.test(x = categ_medic_delta$delta_4, y = categ_texto_delta$delta_4, 
+wilcox.test(x = categ_medic_tiempo$tiempo_4, y = categ_texto_tiempo$tiempo_4, 
             alternative = "two.sided", mu = 0, paired = F,
             conf.int = 0.95)
 
@@ -323,13 +344,13 @@ wilcox.test(x = categ_medic_delta$delta_4, y = categ_texto_delta$delta_4,
 ################
 
 # grafico de correlacion de spearman
-M <- cor(deltas[c(2,3,4)], method="spearman") 
+M <- cor(tiempos[c(2,3,4)], method="spearman") 
 corrplot(M, method = "ellipse", type = "full")
 
 # teste de correlacion por metodo spearman
-cor.test(deltas$delta_2, deltas$delta_3, method = "spearman")
-cor.test(deltas$delta_2, deltas$delta_4, method = "spearman")
-cor.test(deltas$delta_3, deltas$delta_4, method = "spearman")
+cor.test(tiempos$tiempo_2, tiempos$tiempo_3, method = "spearman")
+cor.test(tiempos$tiempo_2, tiempos$tiempo_4, method = "spearman")
+cor.test(tiempos$tiempo_3, tiempos$tiempo_4, method = "spearman")
 
 
 
