@@ -1,4 +1,4 @@
-setwd("C:/Users/smena/Google Drive/Magister/Modelación estadística Aplicaciones Multidisciplinaria/Tarea 1")
+setwd("C:/Users/smena/Google Drive/Magister/Modelación estadística Aplicaciones Multidisciplinaria/Tarea 1 - 2021")
 
 #install.packages("tidyverse")
 #install.packages("reshape2")
@@ -7,6 +7,8 @@ setwd("C:/Users/smena/Google Drive/Magister/Modelación estadística Aplicaciones 
 library(tidyverse)
 library(reshape2)
 library(corrplot)
+require(MASS)
+
 
 #############################
 ## TRANSFORMACION DE DATOS ##
@@ -47,10 +49,10 @@ data <- data %>% mutate(
 
 #### tiempo 1
 # resumen
-summary(tiempos$tiempo_1)
-quantile(tiempos$tiempo_1)
-sd(tiempos$tiempo_1)
-sd(tiempos$tiempo_1)/mean(tiempos$tiempo_1)
+summary(data$tiempo_1)
+quantile(data$tiempo_1)
+sd(data$tiempo_1)
+sd(data$tiempo_1)/mean(tiempos$tiempo_1)
 
 # outliers
 boxplot(data$tiempo_1, plot=FALSE)$out
@@ -62,7 +64,7 @@ ggplot(data, aes(data$tiempo_1)) +
   geom_histogram(bins = 12, color="white", boundary=0) +
   xlab("Tiempos [minuto]") + ylab("Frecuencia") +
   theme_minimal() +
-  xlim(0,7.5)
+  xlim(0,8)
 
 # correción NA #?mean
 data_corr <- data %>% 
@@ -81,32 +83,139 @@ quantile(data_corr$tiempo_1)
 sd(data_corr$tiempo_1)
 sd(data_corr$tiempo_1)/mean(data_corr$tiempo_1)
 
+# test k-s para exponencial
+estimate_tiempo_1 <- fitdistr(data_corr$tiempo_1, "exponential")$estimate[1]
+ks.test(x = data_corr$tiempo_1,"pexp",estimate_tiempo_1)
 
-# test normalidad
-ks.test(x = tiempos$tiempo_1,"pnorm", mean(tiempos$tiempo_1), sd(tiempos$tiempo_1))
+
 
 
 #### tiempo 2
-# resumen
-summary(tiempos$tiempo_2)
-quantile(tiempos$tiempo_2)
-sd(tiempos$tiempo_2)
-sd(tiempos$tiempo_2)/mean(tiempos$tiempo_2)
 
 # outliers
-boxplot(tiempos$tiempo_2, plot=FALSE)$out
+boxplot(data$tiempo_2, plot=FALSE)$out
+
+# Remplazar dato negativo por NA y luego su mediana
+data_corr <- data_corr %>% 
+  mutate(tiempo_2 = replace(tiempo_2, tiempo_2 < 0, NA))
+
+data_corr <- data_corr %>% 
+  mutate(tiempo_2 = replace_na(tiempo_2,median(data$tiempo_2, na.rm = TRUE)))
+
+
+
+# resumen
+summary(data_corr$tiempo_2)
+quantile(data_corr$tiempo_2)
+sd(data_corr$tiempo_2)
+sd(data_corr$tiempo_2)/mean(data_corr$tiempo_2)
+
 
 # boxplot
-ceiling(1 + 3.322 * log10(length(tiempos$tiempo_2)))
-ggplot(tiempos, aes(tiempo_2)) +
+ceiling(1 + 3.322 * log10(length(data_corr$tiempo_2)))
+ggplot(data_corr, aes(tiempo_2)) +
   geom_histogram(bins = 12, color="white", boundary=0) +
   xlab("Tiempos [minuto]") + ylab("Frecuencia") +
   theme_minimal() +
   xlim(0,5)
 
-#test normalidad
-ks.test(x = tiempos$tiempo_2,"pnorm", mean(tiempos$tiempo_2), sd(tiempos$tiempo_2))
 
+
+Ajustex <- fitdistr(data_corr$tiempo_2, "gamma")
+Ajustex$estimate[1]
+Ajustex$estimate[2]
+ks.test(data_corr$tiempo_2, "pgamma", Ajustex$estimate[1], Ajustex$estimate[2])
+
+
+
+install.packages("fitdistrplus")
+install.packages("logspline")
+
+library(fitdistrplus)
+library(logspline)
+
+# logistica
+fit.logis_2 <- fitdist(data_corr$tiempo_2, "logis")
+plot(fit.logis_2)
+
+est.logis_2 <- fitdistr(data_corr$tiempo_2, "logistic")
+ks.test(data_corr$tiempo_2, "plogis", est.logis$estimate[1], est.logis$estimate[2])
+
+
+uuuh
+
+
+####### TIEMPO 2 - OUTLIERS ELIMINADOS
+
+t2o <- data_corr$tiempo_2[!data_corr$tiempo_2 %in% boxplot.stats(data_corr$tiempo_2)$out]
+
+# "norm", "lnorm", "pois", "exp", "gamma", "nbinom", "geom", "beta", "unif" and "logis"
+
+# gamma
+fit.gamma <- fitdist(t2o, "gamma")
+plot(fit.gamma)
+
+est.gamma <- fitdistr(t2o, "gamma")
+ks.test(t2o, "pgamma", est.gamma$estimate[1], est.gamma$estimate[2])
+
+# exponencial
+fit.exp <- fitdist(t2o, "exp")
+plot(fit.exp)
+
+est.exp <- fitdistr(t2o, "exponential")
+ks.test(t2o, "pexp", est.exp$estimate[1])
+
+# normal
+fit.norm <- fitdist(t2o, "norm")
+plot(fit.norm)
+
+est.normal <- fitdistr(t2o, "normal")
+ks.test(t2o, "pnorm", est.normal$estimate[1], est.normal$estimate[2])
+  
+# log normal
+fit.lnorm <- fitdist(t2o, "lnorm")
+plot(fit.lnorm)
+
+est.lnormal <- fitdistr(t2o, "lnormal")
+ks.test(t2o, "plnorm", est.lnormal$estimate[1], est.lnormal$estimate[2])
+
+# logistica
+fit.logis <- fitdist(t2o, "logis")
+plot(fit.logis)
+
+est.logis <- fitdistr(t2o, "logistic")
+ks.test(t2o, "plogis", est.logis$estimate[1], est.logis$estimate[2])
+
+
+
+df <- data.frame(t2o)
+
+ceiling(1 + 3.322 * log10(length(df$t2o)))
+ggplot(df, aes(t2o)) +
+  geom_histogram(bins = 16, color="white", boundary=0) +
+  xlab("Tiempos [minuto]") + ylab("Frecuencia") +
+  theme_minimal() +
+  stat_function(fun = function(x) 
+  {dlogis(x, est.logis$estimate[1], est.logis$estimate[2]) * 250}, 
+  aes(colour = "Dist. Logística"), size = 1) 
+
+
+ggplot(v, aes(x = value, mean = mean, sd = sd, binwidth = binwidth, n = n)) +
+  geom_histogram(aes(y = ..count..), 
+                 breaks = b,
+                 binwidth = binwidth,  
+                 colour = "black", 
+                 fill = "white") +
+  geom_line(aes(y = ..density.. * 1226 * 12, colour = "Empirical"),
+            size = 1, stat = 'density') +
+  stat_function(fun = function(x) 
+  {dnorm(x, mean = mean, sd = sd) * n * binwidth}, 
+  aes(colour = "Normal"), size = 1) 
++
+  labs(x = "Score", y = "Frequency") +
+  scale_colour_manual(name = "Line colors", values = c("red", "blue"))
+
+?dlogis
 
 #### tiempo 3
 # resumen
