@@ -1,0 +1,321 @@
+﻿Id;Sexo;Edad ;Rango edad;Comuna;Frecuencia;Spot en televisión;Anuncio en periódico;Spot radial;Publicidad en internet;Amigo o familiar;Vive en el sector;Médico tratante;Otra;Detalle otra;Área;Origen;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;A;B;C
+1;Femenino;21;Entre 18 y 30 años;Las Condes;Primera visita;0;0;0;0;0;0;1;0;;UTM;Ambulatorio;9;9;8;8;9;4;9;;9;9;8;9;9;;8;9;9;9;9;;9;9;9;9
+2;Femenino;20;Entre 18 y 30 años;Lo Barnechea;Una vez al año;0;0;0;0;0;0;1;0;;Imagenología;Ambulatorio;9;9;7;6;8;7;9;8;9;9;9;7;9;;9;9;9;9;9;7;9;9;9;9
+3;Femenino;49;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;7;8;8;5;5;;8;5;6;6;5;8;7;4;;7;8;;8;7;7;7;8;8
+4;Femenino;58;Entre 30 y 60 años;Las Condes;Una vez por semana;0;0;0;0;0;1;0;0;;UTM;Ambulatorio;8;9;9;2;5;5;9;7;2;5;8;8;8;5;;8;6;8;9;8;8;8;9;9
+5;Femenino;22;Entre 18 y 30 años;Las Condes;Una vez por mes;0;0;0;0;0;0;1;0;;UTM;Ambulatorio;8;9;9;7;9;8;8;8;7;8;9;;;;;8;8;8;9;7;8;8;9;9
+6;Femenino;32;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;1;0;0;1;Isapre Colmena;Consultas;Ambulatorio;8;9;9;8;6;8;9;9;3;6;7;9;8;5;8;9;9;3;9;9;9;9;9;9
+7;Femenino;32;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;1;0;0;1;Isapre Colmena;UTM;Ambulatorio;8;9;9;8;6;8;9;9;3;6;7;9;8;5;8;9;9;3;9;9;9;9;9;9
+8;Femenino;32;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;1;0;0;1;Isapre Colmena;Urgencia;Ambulatorio;8;9;9;8;6;8;9;9;3;6;7;9;8;5;8;9;9;3;9;9;9;9;9;9
+9;Femenino;17;Menor a 18 años;Copiapó;Primera visita;0;0;0;1;0;0;0;0;;Consultas;Ambulatorio;5;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9
+10;Femenino;45;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;1;1;0;;Consultas;Ambulatorio;9;8;8;7;7;7;7;8;7;7;6;8;8;;;8;8;;8;5;7;8;8;8
+11;Femenino;45;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;1;1;0;;UTM;Ambulatorio;9;8;8;7;7;7;7;8;7;7;6;8;8;;;8;8;;8;5;7;8;8;8
+12;Femenino;37;Entre 30 y 60 años;La Reina;Una vez por semana;0;0;0;0;1;1;0;;;Consultas;Ambulatorio;9;9;5;8;8;8;8;7;9;9;7;7;5;5;5;9;4;4;7;8;9;4;6;6
+13;Femenino;37;Entre 30 y 60 años;La Reina;Una vez por semana;0;0;0;0;1;1;0;0;;UTM;Ambulatorio;9;9;5;8;8;8;8;7;9;9;7;7;5;5;5;9;4;4;7;8;9;4;6;6
+14;Femenino;37;Entre 30 y 60 años;La Reina;Una vez por semana;0;0;0;0;1;1;0;0;;Imagenología;Ambulatorio;9;9;5;8;8;8;8;7;9;9;7;7;5;5;5;9;4;4;7;8;9;4;6;6
+15;Masculino;31;Entre 30 y 60 años;Parral;Una vez por mes;0;0;0;1;0;0;0;0;;Consultas;Ambulatorio;9;9;9;7;7;7;4;8;8;9;3;8;7;3;7;7;8;6;7;7;8;7;7;8
+16;Masculino;31;Entre 30 y 60 años;Parral;Una vez por mes;0;0;0;1;0;0;0;0;;UTM;Ambulatorio;9;9;9;7;7;7;4;8;8;9;3;8;7;3;7;7;8;6;7;7;8;7;7;8
+17;Masculino;31;Entre 30 y 60 años;Parral;Una vez por mes;0;0;0;1;0;0;0;0;;Pediatría Hospitalizado;hospitalizado;9;9;9;7;7;7;4;8;8;9;3;8;7;3;7;7;8;6;7;7;8;7;7;8
+18;Femenino;42;Entre 30 y 60 años;Cabrero;Primera visita;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;9;9;9;5;9;5;9;9;9;8;9;8;8;;3;8;9;9;9;9;9;9;9;9
+19;Femenino;42;Entre 30 y 60 años;Cabrero;Primera visita;0;0;0;0;1;0;0;0;;UTM;Ambulatorio;9;9;9;5;9;5;9;9;9;8;9;8;8;;3;8;9;9;9;9;9;9;9;9
+20;Femenino;42;Entre 30 y 60 años;Cabrero;Primera visita;0;0;0;0;1;0;0;0;;Vacunatorio;Ambulatorio;9;9;9;5;9;5;9;9;9;8;9;8;8;;3;8;9;9;9;9;9;9;9;9
+21;Femenino;42;Entre 30 y 60 años;Cabrero;Primera visita;0;0;0;0;1;0;0;0;;Procedimientos;Ambulatorio;9;9;9;5;9;5;9;9;9;8;9;8;8;;3;8;9;9;9;9;9;9;9;9
+22;Masculino;13;Menor a 18 años;Las Condes;Una vez al año;0;0;0;0;0;0;1;;;Consultas;Ambulatorio;9;9;7;6;6;6;6;6;6;6;6;6;8;5;8;9;9;5;7;8;8;8;9;9
+23;Femenino;44;Entre 30 y 60 años;Vitacura;Primera visita;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;7;8;8;7;8;1;4;7;7;6;6;9;;;;8;8;;8;8;6;7;7;7
+24;Masculino;62;Sobre 60 años;Lo Barnechea;Una vez por mes;0;0;0;0;1;0;1;0;;Procedimientos;Ambulatorio;8;8;9;7;6;3;5;6;6;7;7;8;8;8;;9;9;;8;8;8;8;8;8
+25;Masculino;62;Sobre 60 años;Lo Barnechea;Una vez por mes;0;0;0;0;1;0;1;0;;Imagenología;Ambulatorio;8;8;9;7;6;3;5;6;6;7;7;8;8;8;;9;9;;8;8;8;8;8;8
+26;Masculino;62;Sobre 60 años;Lo Barnechea;Una vez por mes;0;0;0;0;1;0;1;0;;Consultas;Ambulatorio;8;8;9;7;6;3;5;6;6;7;7;8;8;8;;9;9;;8;8;8;8;8;8
+27;Femenino;27;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;;UTM;Ambulatorio;8;8;8;6;7;8;8;7;6;8;7;8;8;;;;8;;8;9;9;8;8;8
+28;Masculino;59;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;1;0;0;;Procedimientos;Ambulatorio;9;9;5;7;4;7;6;5;7;6;4;3;;;7;7;5;6;9;6;8;5;4;5
+29;Masculino;59;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;1;0;0;;UTM;Ambulatorio;9;9;5;7;4;7;6;5;7;6;4;3;;;7;7;5;6;9;6;8;5;4;5
+30;Masculino;37;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;0;0;1;Empresa Convenio;Procedimientos;Ambulatorio;8;8;7;3;7;5;9;7;5;9;8;;5;6;3;7;8;;8;4;7;7;7;5
+31;Masculino;37;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;0;0;1;Empresa Convenio;Urgencia;Ambulatorio;8;8;7;3;7;5;9;7;5;9;8;;5;6;3;7;8;;8;4;7;7;7;5
+32;Femenino;26;Entre 18 y 30 años;Lo Barnechea;Una vez por semana;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;7;7;8;6;4;7;7;7;7;4;5;6;6;2;8;6;8;6;8;9;8;8;8;8
+33;Femenino;26;Entre 18 y 30 años;Lo Barnechea;Una vez por semana;0;0;0;0;1;0;0;0;;Imagenología;Ambulatorio;7;7;8;6;4;7;7;7;7;4;5;6;6;2;8;6;8;6;8;9;8;8;8;8
+34;Femenino;37;Entre 30 y 60 años;Talagante;Una vez por mes;0;0;0;0;0;0;1;0;;Urgencia;Ambulatorio;5;9;9;8;9;8;9;9;7;9;9;7;9;;9;9;9;9;9;9;9;7;9;9
+35;Masculino;38;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;1;1;0;;Urgencia;Ambulatorio;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9
+36;Masculino;38;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;1;1;0;;Consultas;Ambulatorio;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9
+37;Femenino;68;Sobre 60 años;Vitacura;Una vez por mes;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;4;9;9;9;;8;9;9;9;4;5;9;;;;9;9;;9;9;9;8;9;9
+38;Femenino;53;Entre 30 y 60 años;Copiapó;Una vez al año;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;9;9;9;9;;9;9;9;;9;4;8;;;;8;;9;7;9;9;9;9;9
+39;Masculino;28;Entre 18 y 30 años;Punta Arenas;Primera visita;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;9;7;9;9;7;9;9;9;9;9;9;9;;;9;9;9;9;9;9;9;9;9;9
+40;Masculino;17;Menor a 18 años;Providencia;Una vez por mes;0;0;0;1;0;0;0;0;;UTM;Ambulatorio;9;7;8;5;;5;5;7;6;8;8;8;8;;;8;;8;9;8;8;8;8;8
+41;Masculino;17;Menor a 18 años;Providencia;Una vez por mes;0;0;0;1;0;0;0;0;;Procedimientos;Ambulatorio;9;7;8;5;;5;5;7;6;8;8;8;8;;;8;;8;9;8;8;8;8;8
+42;Masculino;63;Sobre 60 años;Vitacura;Una vez al año;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;9;9;9;5;7;5;6;6;8;8;8;8;;;;8;8;;8;8;8;8;8;8
+43;Masculino;63;Sobre 60 años;Vitacura;Una vez al año;0;0;0;0;0;0;1;0;;UTM;Ambulatorio;9;9;9;5;7;5;6;6;8;8;8;8;;;;8;8;;8;8;8;8;8;8
+44;Femenino;45;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;0;1;0;;UTM;Ambulatorio;6;8;8;2;3;7;2;7;2;2;8;8;6;;;8;8;;7;8;7;7;2;2
+45;Masculino;70;Sobre 60 años;Las Condes;Una vez por mes;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;8;8;9;6;8;6;7;8;8;8;8;7;8;;8;8;8;;8;5;8;8;8;8
+46;Masculino;70;Sobre 60 años;Las Condes;Una vez por mes;0;0;0;0;0;0;1;0;;UTM;Ambulatorio;8;8;9;6;8;6;7;8;8;8;8;7;8;;8;8;8;;8;5;8;8;8;8
+47;Masculino;70;Sobre 60 años;Las Condes;Una vez por mes;0;0;0;0;0;0;1;0;;Médico Quirúrgico;;8;8;9;6;8;6;7;8;8;8;8;7;8;;8;8;8;;8;5;8;8;8;8
+48;Masculino;70;Sobre 60 años;Las Condes;Una vez por mes;0;0;0;0;0;0;1;0;;Procedimientos;Ambulatorio;8;8;9;6;8;6;7;8;8;8;8;7;8;;8;8;8;;8;5;8;8;8;8
+49;Masculino;70;Sobre 60 años;Las Condes;Una vez por mes;0;0;0;0;0;0;1;0;;Imagenología;Ambulatorio;8;8;9;6;8;6;7;8;8;8;8;7;8;;8;8;8;;8;5;8;8;8;8
+50;Femenino;74;Sobre 60 años;Vitacura;Una vez por mes;0;0;0;0;1;0;1;0;;Consultas;Ambulatorio;9;9;9;9;9;9;9;9;9;8;;9;9;;;;9;9;;8;9;9;9;9
+51;Femenino;74;Sobre 60 años;Vitacura;una vez por mes;0;0;0;0;1;0;1;0;;UTM;Ambulatorio;9;9;9;9;9;9;9;9;9;8;;9;9;;;;9;9;;8;9;9;9;9
+52;Masculino;44;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;1;0;0;0;;UTM;Ambulatorio;8;8;7;8;9;8;9;8;7;7;8;8;9;;5;7;8;8;8;9;9;8;9;9
+53;Masculino;44;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;1;0;0;0;;Procedimientos;Ambulatorio;8;8;7;8;9;8;9;8;7;7;8;8;9;;5;7;8;8;8;9;9;8;9;9
+54;Masculino;44;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;1;0;0;0;;Imagenología;Ambulatorio;8;8;7;8;9;8;9;8;7;7;8;8;9;;5;7;8;8;8;9;9;8;9;9
+55;Masculino;39;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;1;0;0;1;0;;Consultas;Ambulatorio;8;9;7;6;5;8;8;8;8;8;8;8;9;5;5;9;9;5;8;9;8;8;9;9
+56;Femenino;45;Entre 30 y 60 años;Las Condes;una vez por mes;0;0;0;0;0;1;1;0;;Consultas;Ambulatorio;8;8;7;7;8;9;9;8;8;7;9;9;9;6;6;7;7;6;8;8;9;8;8;8
+57;Femenino;33;Entre 30 y 60 años;Vitacura;Primera visita;0;0;0;0;1;0;0;0;;UTM;Ambulatorio;9;8;9;9;9;8;7;7;9;9;8;8;9;6;6;7;7;7;9;9;9;9;9;9
+58;Femenino;33;Entre 30 y 60 años;Vitacura;Primera visita;0;0;0;0;1;0;0;0;;Imagenología;Ambulatorio;9;8;9;9;9;8;7;7;9;9;8;8;9;6;6;7;7;7;9;9;9;9;9;9
+59;Masculino;28;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;1;0;1;0;;Procedimientos;Ambulatorio;8;9;9;9;9;8;9;8;8;8;9;9;9;8;8;8;9;8;9;8;9;9;9;9
+60;Masculino;28;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;1;0;1;0;;Consultas;Ambulatorio;8;9;9;9;9;8;9;8;8;8;9;9;9;8;8;8;9;8;9;8;9;9;9;9
+61;Masculino;24;Entre 18 y 30 años;Lo Barnechea;Una vez al año;0;0;0;0;1;0;0;0;;Procedimientos;Ambulatorio;9;9;9;7;7;3;8;8;8;8;7;8;8;3;4;8;8;1;9;9;9;9;9;9
+62;Masculino;46;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;0;1;0;;Procedimientos;Ambulatorio;8;9;9;7;7;2;7;6;7;9;9;8;9;5;4;8;9;4;8;9;8;8;9;9
+63;Femenino;33;Entre 30 y 60 años;Lo Barnechea;Una vez por mes;0;0;0;0;1;0;0;0;;Procedimientos;Ambulatorio;9;9;9;7;7;5;8;9;9;9;8;7;8;;6;9;9;9;8;9;8;9;9;9
+64;Femenino;33;Entre 30 y 60 años;Lo Barnechea;Una vez por mes;0;0;0;0;1;0;0;0;;Imagenología;Ambulatorio;9;9;9;7;7;5;8;9;9;9;8;7;8;;6;9;9;9;8;9;8;9;9;9
+65;Masculino;27;Entre 18 y 30 años;Lo Barnechea;Una vez al año;0;0;0;0;1;0;1;0;;Procedimientos;Ambulatorio;7;8;8;6;4;8;7;5;5;7;8;6;7;7;8;8;9;9;8;9;8;8;8;8
+66;Femenino;21;Entre 18 y 30 años;Lo Barnechea;Una vez al año;0;0;0;0;1;0;0;0;;Procedimientos;Ambulatorio;9;9;9;7;8;7;9;9;9;9;9;9;9;7;5;7;9;4;9;9;9;9;9;9
+67;Femenino;28;Entre 18 y 30 años;Las Condes;Una vez por mes;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;8;9;9;5;2;3;6;4;9;9;5;8;2;1;9;8;9;2;7;9;8;9;8;9
+68;Masculino;19;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;9;9;9;7;7;5;9;8;8;8;9;9;9;;4;9;9;1;9;9;9;9;9;9
+69;Femenino;35;Entre 30 y 60 años;Ñuñoa;Una vez por mes;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;8;9;7;9;6;4;7;8;;8;1;9;9;;;;8;8;9;9;9;9;9;9
+70;Femenino;37;Entre 30 y 60 años;Lo Barnechea;Primera visita;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;9;9;9;7;8;7;9;8;9;9;9;9;9;;9;9;9;9;9;3;9;9;9;9
+71;Femenino;41;Entre 30 y 60 años;Providencia;Una vez por mes;0;0;0;0;0;0;1;0;;Urgencia;Ambulatorio;9;9;9;9;7;9;9;9;9;9;9;9;9;1;9;9;9;9;9;9;9;9;9;9
+72;Femenino;25;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;;Urgencia;Ambulatorio;5;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9
+73;Masculino;10;Menor a 18 años;Las Condes;Primera visita;0;0;0;0;0;0;0;1;"Scuola Italiana ""V.Montiglio";Urgencia;Ambulatorio;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8
+74;Femenino;18;Entre 18 y 30 años;Las Condes;Primera visita;0;0;0;0;1;0;0;0;;Urgencia;Ambulatorio;9;9;9;9;9;7;9;9;9;9;9;9;8;9;9;9;9;5;9;9;9;9;7;9
+75;Masculino;67;Sobre 60 años;Lo Barnechea;Una vez por mes;0;1;0;0;0;0;1;0;;Consultas;Ambulatorio;8;8;7;5;7;6;9;7;8;9;8;8;8;4;;9;8;7;8;8;8;8;8;8
+76;Masculino;67;Sobre 60 años;Lo Barnechea;Una vez por mes;0;1;0;0;0;0;1;0;;UTM;Ambulatorio;8;8;7;5;7;6;9;7;8;9;8;8;8;4;;9;8;;8;8;8;8;8;8
+77;Femenino;29;Entre 18 y 30 años;Vitacura;Primera visita;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;7;8;8;1;4;1;7;8;8;9;5;7;9;;1;8;9;1;9;9;9;8;8;8
+78;Femenino;39;Entre 30 y 60 años;Chillán;Una vez al año;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;7;8;9;9;4;9;8;9;9;9;;9;;;;9;9;;9;9;9;9;9;9
+79;Masculino;85;Sobre 60 años;Las Condes;Una vez por mes;0;1;0;0;1;1;1;0;;Consultas;Ambulatorio;9;9;9;7;7;8;8;9;8;9;6;8;8;;;9;9;;8;8;9;8;9;9
+80;Masculino;85;Sobre 60 años;Las Condes;Una vez por mes;0;1;0;0;1;1;1;0;;UTM;Ambulatorio;9;9;9;7;7;8;8;9;8;9;6;8;8;;;9;9;;8;8;9;8;9;9
+81;Masculino;85;Sobre 60 años;Las Condes;Una vez por mes;0;1;0;0;1;1;1;0;;Imagenología;Ambulatorio;9;9;9;7;7;8;8;9;8;9;6;8;8;;;9;9;;8;8;9;8;9;9
+82;Masculino;85;Sobre 60 años;Las Condes;Una vez por mes;0;1;0;0;1;1;1;0;;Urgencia;Ambulatorio;9;9;9;7;7;8;8;9;8;9;6;8;8;;;9;9;;8;8;9;8;9;9
+83;Femenino;51;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;1;0;0;;Consultas;Ambulatorio;8;9;7;5;3;6;7;2;6;6;7;4;6;;;;8;;8;8;8;8;7;8
+84;Femenino;51;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;1;0;0;;UTM;Ambulatorio;8;9;7;5;3;6;7;2;6;6;7;4;6;;;;8;;8;8;8;8;7;8
+85;Femenino;51;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;1;0;0;;Urgencia;Ambulatorio;8;9;7;5;3;6;7;2;6;6;7;4;6;;;;8;;8;8;8;8;7;8
+86;Femenino;22;Entre 18 y 30 años;Las Condes;Una vez por mes;0;0;0;0;0;1;0;0;;UTM;Ambulatorio;8;8;8;7;9;9;9;9;7;7;9;8;7;9;7;6;9;8;9;9;9;9;9;9
+87;Femenino;50;Entre 30 y 60 años;Pirque;Primera visita;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;9;9;9;9;;9;9;8;9;9;9;9;;;;9;9;;9;9;9;9;9;
+88;Femenino;34;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;7;9;7;4;;8;8;8;9;9;9;9;7;9;9;9;8;5;5;8;9;9;9;9
+89;Femenino;34;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;1;0;0;0;;UTM;Ambulatorio;7;9;7;4;;8;8;8;9;9;9;9;7;9;9;9;8;5;5;8;9;9;9;9
+90;Femenino;34;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;1;0;0;0;;Vacunatorio;Ambulatorio;7;9;7;4;;8;8;8;9;9;9;9;7;9;9;9;8;5;5;8;9;9;9;9
+91;Masculino;63;Sobre 60 años;Vitacura;una vez por mes;0;0;0;0;0;0;1;0;;Procedimientos;Ambulatorio;9;9;8;9;9;8;8;7;6;9;8;8;9;6;8;6;6;7;8;9;7;8;8;8
+92;Femenino;69;Sobre 60 años;Las Condes;Una vez al año;0;0;0;0;0;0;1;0;;UTM;Ambulatorio;8;8;8;3;6;7;8;8;8;7;8;8;8;7;8;8;8;8;8;8;8;9;9;9
+93;Femenino;67;Sobre 60 años;Melipilla;Primera visita;0;0;0;0;1;0;0;0;;UTM;Ambulatorio;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;;9;8;9;9;9;9
+94;Femenino;67;Sobre 60 años;Melipilla;Primera visita;0;0;0;0;1;0;0;0;;Procedimientos;Ambulatorio;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;;9;8;9;9;9;9
+95;Femenino;67;Sobre 60 años;Melipilla;Primera visita;0;0;0;0;1;0;0;0;;Imagenología;Ambulatorio;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;;9;8;9;9;9;9
+96;Femenino;61;Sobre 60 años;La Reina;Una vez por mes;1;0;0;0;0;0;0;0;;UTM;Ambulatorio;8;9;;7;8;8;7;9;9;9;8;7;;;8;7;8;;8;9;8;8;9;9
+97;Femenino;61;Sobre 60 años;La Reina;Una vez por mes;1;0;0;0;0;0;0;0;;Imagenología;Ambulatorio;8;9;;7;8;8;7;9;9;9;8;7;;;8;7;8;;8;9;8;8;9;9
+98;Masculino;30;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;1;0;0;;Vacunatorio;Ambulatorio;4;7;8;1;3;6;9;6;2;3;3;2;5;5;5;8;8;8;9;8;9;9;6;7
+99;Masculino;37;Entre 30 y 60 años;Vitacura;Una vez por mes;0;0;0;1;1;0;0;0;;UTM;Ambulatorio;8;8;8;8;5;8;8;8;8;8;6;6;8;5;5;5;8;5;8;8;8;8;8;8
+100;Femenino;45;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;1;1;0;;Consultas;Ambulatorio;9;9;9;2;9;8;5;6;7;8;8;9;7;2;8;8;7;9;6;9;8;8;8;8
+101;Femenino;45;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;1;1;0;;UTM;Ambulatorio;9;9;9;2;9;8;5;6;7;8;8;9;7;2;8;8;7;9;6;9;8;8;8;8
+102;Femenino;45;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;1;1;0;;Imagenología;Ambulatorio;9;9;9;2;9;8;5;6;7;8;8;9;7;2;8;8;7;9;6;9;8;8;8;8
+103;Femenino;46;Entre 30 y 60 años;Las Condes;una vez por mes;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;9;9;9;8;9;9;9;8;8;9;7;1;5;;;3;7;;5;3;7;8;8;8
+104;Femenino;46;Entre 30 y 60 años;Las Condes;una vez por mes;0;0;0;0;0;0;1;0;;UTM;Ambulatorio;9;9;9;8;9;9;9;8;8;9;7;1;5;;;3;7;;5;3;7;8;8;8
+105;Masculino;37;Entre 30 y 60 años;Las Condes;una vez por mes;0;0;0;0;0;1;0;0;;Consultas;Ambulatorio;9;9;9;7;8;9;9;9;9;8;9;9;9;;;9;9;9;8;9;9;8;8;8
+106;Femenino;30;Entre 30 y 60 años;Las Condes;una vez por mes;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;9;8;9;8;8;9;9;9;9;8;9;9;8;4;5;9;9;8;9;9;9;9;9;9
+107;Femenino;32;Entre 30 y 60 años;Las Condes;una vez por mes;0;0;0;0;0;1;0;0;;Consultas;Ambulatorio;7;6;8;6;7;8;6;6;5;4;4;5;;;6;6;;5;6;5;5;5;5;5
+108;Femenino;50;Entre 30 y 60 años;Las Condes;Primera visita;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;7;9;9;9;1;9;7;9;9;7;1;9;;1;;9;8;9;9;9;9;9;9;9
+109;Femenino;50;Entre 30 y 60 años;Las Condes;Primera visita;0;0;0;0;1;0;0;0;;Procedimientos;Ambulatorio;7;9;9;9;1;9;7;9;9;7;1;9;;1;;9;8;9;9;9;9;9;9;9
+110;Femenino;42;Entre 30 y 60 años;Las Condes;una vez por mes;0;0;0;0;0;1;0;0;;Consultas;Ambulatorio;9;8;8;8;3;6;7;5;6;6;6;9;3;5;6;8;7;;8;6;7;8;8;8
+111;Femenino;42;Entre 30 y 60 años;Las Condes;una vez por mes;0;0;0;0;0;1;0;0;;UTM;Ambulatorio;9;8;8;8;3;6;7;5;6;6;6;9;3;5;6;8;7;;8;6;7;8;8;8
+112;Femenino;42;Entre 30 y 60 años;Las Condes;una vez por mes;0;0;0;0;0;1;0;0;;Vacunatorio;Ambulatorio;9;8;8;8;3;6;7;5;6;6;6;9;3;5;6;8;7;;8;6;7;8;8;8
+113;Masculino;48;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;8;9;9;9;5;6;9;9;9;4;9;9;9;;;9;9;;9;9;9;9;9;9
+114;Masculino;48;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;1;0;0;0;;UTM;Ambulatorio;8;9;9;9;5;6;9;9;9;4;9;9;9;;;9;9;;9;9;9;9;9;9
+115;Femenino;54;Entre 30 y 60 años;La Reina;Una vez al año;0;1;0;0;0;0;0;0;;Imagenología;Ambulatorio;9;9;8;7;8;7;8;8;9;8;8;8;;;8;8;7;7;8;9;9;8;8;8
+116;Masculino;20;Entre 18 y 30 años;Las Condes;Una vez por mes;0;0;0;0;0;1;0;0;;Consultas;Ambulatorio;7;9;8;8;3;9;8;8;9;8;8;7;9;3;6;7;5;8;6;8;9;8;7;8
+117;Femenino;34;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;0;0;1;Isapre ;Consultas;Ambulatorio;9;9;9;8;9;6;9;9;7;8;9;9;;;9;9;9;8;9;8;8;9;9;9
+118;Masculino;24;Entre 18 y 30 años;Las Condes;Una vez por mes;0;0;0;1;0;1;0;0;;Consultas;Ambulatorio;8;9;9;7;8;9;7;6;8;9;7;7;9;1;7;8;9;8;9;9;9;8;8;8
+119;Femenino;48;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;1;0;0;;Consultas;Ambulatorio;9;4;7;7;2;1;3;5;8;9;9;9;9;2;1;8;4;2;9;5;5;9;8;8
+120;Femenino;48;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;1;0;0;;Urgencia;Ambulatorio;9;4;7;7;2;1;3;5;8;9;9;9;9;2;1;8;4;2;9;5;5;9;8;8
+121;Femenino;48;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;1;0;0;;Imagenología;Ambulatorio;9;4;7;7;2;1;3;5;8;9;9;9;9;2;1;8;4;2;9;5;5;9;8;8
+122;Femenino;54;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;;UTM;Ambulatorio;9;9;8;8;8;8;8;9;9;9;9;9;9;9;8;9;9;9;9;9;9;9;9;9
+123;Masculino;19;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;;UTM;Ambulatorio;3;9;9;9;9;9;9;4;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9;9
+124;Masculino;17;Menor a 18 años;Las Condes;Una vez por mes;0;0;0;0;1;0;1;0;;Consultas;Ambulatorio;7;5;7;1;5;1;5;5;5;8;8;5;7;5;9;8;7;5;7;9;5;7;7;7
+125;Masculino;35;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;1;0;0;;Consultas;Ambulatorio;5;9;8;6;9;9;7;8;8;5;8;8;6;;7;8;8;7;8;9;8;8;8;8
+126;Femenino;33;Entre 30 y 60 años;Vitacura;Una vez por mes;0;0;0;1;0;0;1;0;;Urgencia;Ambulatorio;6;9;9;8;9;9;9;9;9;8;9;8;8;;;9;9;8;9;9;9;9;9;9
+127;Femenino;31;Entre 30 y 60 años;La Reina;Una vez por mes;0;0;0;0;0;1;0;0;;Consultas;Ambulatorio;9;8;8;6;6;6;6;8;8;8;8;8;6;;6;6;6;;4;9;9;7;7;7
+128;Masculino;52;Entre 30 y 60 años;Vitacura;Una vez al año;0;0;0;0;1;0;1;0;;Procedimientos;Ambulatorio;8;7;8;7;7;7;7;8;8;9;9;8;5;5;6;6;6;6;8;8;8;8;8;8
+129;Masculino;52;Entre 30 y 60 años;Vitacura;Una vez al año;0;0;0;0;1;0;1;0;;Consultas;Ambulatorio;8;7;8;7;7;7;7;8;8;9;9;8;5;5;6;6;6;6;8;8;8;8;8;8
+130;Masculino;71;Sobre 60 años;Las Condes;una vez al mes;0;0;0;0;0;1;1;0;;Imagenología;Ambulatorio;8;8;8;8;8;7;7;9;9;9;9;8;7;7;;8;8;;9;9;9;9;9;9
+131;Masculino;44;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;1;0;1;0;0;;Urgencia;Ambulatorio;9;9;9;3;6;7;8;6;8;8;8;7;7;7;5;8;9;6;9;9;8;8;8;8
+132;Masculino;44;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;1;0;1;0;0;;Imagenología;Ambulatorio;9;9;9;3;6;7;8;6;8;8;8;7;7;7;5;8;9;6;9;9;8;8;8;8
+133;Femenino;20;Entre 18 y 30 años;Providencia;Una vez al año;0;0;0;0;0;0;1;0;;Procedimientos;Ambulatorio;8;8;8;8;7;8;8;8;8;4;8;8;9;8;8;8;8;8;9;9;9;9;9;9
+134;Femenino;66;Sobre 60 años;Las Condes;una vez al mes;0;0;0;0;1;1;0;0;;Consultas;Ambulatorio;6;6;5;6;5;7;7;5;8;8;4;7;7;8;5;5;6;5;8;8;7;7;7;7
+135;Femenino;66;Sobre 60 años;Las Condes;una vez al mes;0;0;0;0;1;1;0;0;;Imagenología;Ambulatorio;6;6;5;6;5;7;7;5;8;8;4;7;7;8;5;5;6;5;8;8;7;7;7;7
+136;Masculino;47;Entre 30 y 60 años;Vitacura;una vez al mes;0;0;0;1;1;0;0;0;;Procedimientos;Ambulatorio;7;7;8;9;6;4;6;7;7;9;7;9;9;8;7;6;7;6;8;9;7;8;8;8
+137;Masculino;55;Entre 30 y 60 años;Las Condes;Primera visita;0;0;0;0;0;1;1;0;;Consultas;Ambulatorio;7;8;7;7;7;8;8;8;9;9;9;9;5;8;8;6;7;7;7;8;8;9;9;9
+138;Masculino;31;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;1;0;0;0;;Procedimientos;Ambulatorio;8;8;9;8;9;8;8;8;9;9;9;9;8;8;8;9;9;9;9;9;9;9;9;9
+139;Femenino;56;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;1;0;1;0;;Procedimientos;Ambulatorio;7;7;5;7;6;5;7;8;8;7;7;5;8;4;;7;7;;7;8;7;7;7;7
+140;Femenino;56;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;1;0;1;0;;UTM;Ambulatorio;7;7;5;7;6;5;7;8;8;7;7;5;8;4;;7;7;;7;8;7;7;7;7
+141;Femenino;21;Entre 18 y 30 años;La Reina;Una vez al año;0;0;0;0;1;0;0;0;;Imagenología;Ambulatorio;8;8;8;8;9;9;9;9;9;8;9;9;8;6;6;7;7;5;7;7;8;8;8;8
+142;Femenino;21;Entre 18 y 30 años;La Reina;Una vez al año;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;8;8;8;8;9;9;9;9;9;8;9;9;8;6;6;7;7;5;7;7;8;8;8;8
+143;Masculino;30;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;1;1;1;0;;Consultas;Ambulatorio;8;8;8;8;9;9;9;9;9;9;8;9;9;8;8;8;8;8;9;9;9;8;9;9
+144;Masculino;30;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;1;1;1;0;;Procedimientos;Ambulatorio;8;8;8;8;9;9;9;9;9;9;8;9;9;8;8;8;8;8;9;9;9;8;9;9
+145;Masculino;58;Entre 30 y 60 años;Lo Barnechea;una vez al mes;0;0;0;0;1;0;1;0;;Procedimientos;Ambulatorio;7;8;7;6;7;7;8;8;7;5;6;5;7;7;7;6;6;7;8;8;8;7;7;7
+146;Masculino;64;Sobre 60 años;Las Condes;una vez al mes;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;8;8;8;8;7;8;8;8;9;9;9;9;8;9;8;9;9;8;9;9;8;8;8;9
+147;Femenino;31;Entre 30 y 60 años;La Reina;Una vez por mes;0;0;0;0;0;1;0;0;;Consultas;Ambulatorio;9;8;8;6;6;6;6;8;8;8;8;8;6;;6;6;6;;5;9;9;7;7;7
+148;Femenino;60;Sobre 60 años;Las Condes;Una vez por mes;0;0;0;0;0;1;0;0;;Consultas;Ambulatorio;9;8;8;9;9;9;9;8;8;8;8;8;9;9;9;8;8;8;8;8;8;8;8;8
+149;Femenino;9;Menor a 18 años;Las Condes;Una vez por mes;0;0;0;0;0;1;0;0;;Urgencia;Ambulatorio;8;7;8;9;5;9;9;7;8;7;8;9;6;4;9;9;9;;9;9;9;9;9;9
+150;Femenino;34;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;;UTM;Ambulatorio;9;9;8;6;5;7;9;8;8;5;8;6;7;4;;8;8;;9;8;8;8;8;7
+151;Femenino;34;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;;Imagenología;Ambulatorio;9;9;8;6;5;7;9;8;8;5;8;6;7;4;;8;8;;9;8;8;8;8;7
+152;Femenino;35;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;1;0;0;;Urgencia;Ambulatorio;9;9;9;7;9;8;8;7;8;9;9;6;9;;9;8;8;7;8;8;8;8;8;9
+153;Masculino;19;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;;Urgencia;Ambulatorio;9;9;8;7;9;9;7;8;9;9;9;9;6;;;9;7;8;9;9;9;7;8;9
+154;Masculino;88;Sobre 60 años;Las Condes;una vez por mes;0;0;0;0;0;0;1;0;;UTM;Ambulatorio;9;9;9;7;6;7;8;8;7;7;8;2;7;;7;9;9;6;6;4;8;8;8;8
+155;Femenino;41;Entre 30 y 60 años;La Reina;una vez por mes;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;8;8;8;5;6;5;5;8;8;9;8;8;8;;7;9;9;;9;9;9;9;9;9
+156;Femenino;35;Entre 30 y 60 años;Las Condes;Una vez por semana;0;0;0;0;0;0;0;1;Isapre ;Procedimientos;Ambulatorio;9;9;9;7;7;8;5;9;8;7;8;8;;;9;8;8;8;9;6;8;8;8;9
+157;Femenino;35;Entre 30 y 60 años;Las Condes;Una vez por semana;0;0;0;0;0;0;0;1;Isapre ;Imagenología;Ambulatorio;9;9;9;7;7;8;5;9;8;7;8;8;;;9;8;8;8;9;6;8;8;8;9
+158;Masculino;52;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;1;0;1;0;;Procedimientos;Ambulatorio;9;8;8;6;6;6;7;8;9;9;7;4;8;7;7;7;7;8;8;8;8;7;8;8
+159;Masculino;52;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;1;0;1;0;;Consultas;Ambulatorio;9;8;8;6;6;6;7;8;9;9;7;4;8;7;7;7;7;8;8;8;8;7;8;8
+160;Masculino;66;Sobre 60 años;Las Condes;Una vez por semana;0;0;0;0;0;1;1;0;;Imagenología;Ambulatorio;9;9;9;5;5;6;6;6;5;4;7;8;7;;8;8;7;;8;7;7;7;7;7
+161;Femenino;15;Menor a 18 años;Las Condes;Primera visita;0;0;0;0;0;1;0;0;;Urgencia;Ambulatorio;9;9;8;8;8;8;9;9;9;9;8;7;9;9;9;9;8;8;8;7;8;9;9;9
+162;Femenino;22;Entre 18 y 30 años;Vitacura;Una vez al año;0;0;0;0;1;0;0;0;;Procedimientos;Ambulatorio;9;8;8;8;7;5;6;6;7;7;8;9;9;7;7;8;8;8;7;8;8;9;9;9
+163;Masculino;51;Entre 30 y 60 años;Las Condes;una vez por mes;0;0;0;0;0;0;1;0;;Imagenología;Ambulatorio;9;8;8;7;7;7;7;7;7;7;7;5;6;5;7;7;8;8;7;8;7;7;8;7
+164;Masculino;51;Entre 30 y 60 años;Las Condes;una vez por mes;0;0;0;0;0;0;1;0;;Procedimientos;Ambulatorio;9;8;8;7;7;7;7;7;7;7;7;5;6;5;7;7;8;8;7;8;7;7;8;7
+165;Masculino;16;Menor a 18 años;Las Condes;Una vez al año;0;0;0;0;0;0;0;1;Seguro Escolar;Urgencia;Ambulatorio;8;8;8;8;8;8;9;9;9;9;7;8;8;8;8;9;9;9;9;9;9;9;9;9
+166;Femenino;55;Entre 30 y 60 años;Lo Barnechea;Una vez por mes;0;0;0;0;0;0;1;0;;Procedimientos;Ambulatorio;8;9;9;6;7;6;7;7;8;8;9;1;7;7;8;8;7;6;8;9;9;8;8;8
+167;Masculino;41;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;1;1;0;0;0;;Consultas;Ambulatorio;8;8;8;8;8;8;8;8;9;8;8;8;8;8;8;8;8;8;8;9;9;9;9;9
+168;Femenino;65;Sobre 60 años;Lo Barnechea;Una vez por mes;0;0;0;0;0;0;1;0;;Urgencia;Ambulatorio;7;7;7;5;6;6;7;7;8;7;7;2;6;4;;7;6;;7;9;7;6;7;7
+169;Femenino;48;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;1;1;0;;Procedimientos;Ambulatorio;7;8;8;7;9;9;8;8;9;9;9;8;8;8;8;7;9;9;9;8;8;8;8;8
+170;Femenino;32;Entre 30 y 60 años;La Reina;Una vez por semana;0;0;0;0;1;0;1;0;;Consultas;Ambulatorio;8;9;9;9;9;7;8;8;8;9;9;8;5;7;6;6;7;7;7;8;8;8;9;9
+171;Femenino;32;Entre 30 y 60 años;La Reina;una vez por;0;0;0;0;1;0;1;0;;Imagenología;Ambulatorio;8;9;9;9;9;7;8;8;8;9;9;8;5;7;6;6;7;7;7;8;8;8;9;9
+172;Masculino;24;Entre 18 y 30 años;Lo Barnechea;Una vez al año;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;9;9;8;9;7;8;9;8;8;8;8;6;8;7;8;8;7;8;9;9;9;9;9;9
+173;Masculino;24;Entre 18 y 30 años;Lo Barnechea;Una vez al año;0;0;0;0;1;0;0;0;;UTM;Ambulatorio;9;9;8;9;7;8;9;8;8;8;8;6;8;7;8;8;7;8;9;9;9;9;9;9
+174;Femenino;54;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;1;1;0;;Imagenología;Ambulatorio;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8
+175;Femenino;23;Entre 18 y 30 años;Las Condes;Una vez por mes;0;0;0;0;0;0;1;0;;UTM;Ambulatorio;8;9;9;8;9;9;9;8;9;9;9;8;9;;7;8;8;9;8;8;9;9;9;9
+176;Masculino;27;Entre 18 y 30 años;Calera de Tango;Primera visita;0;1;0;0;0;0;0;0;;Urgencia;Ambulatorio;6;8;7;6;4;6;9;3;5;8;3;7;7;3;6;8;8;8;8;8;8;8;8;6
+177;Femenino;74;Sobre 60 años;Las Condes;Una vez por semana;0;0;0;0;0;1;1;0;;Procedimientos;Ambulatorio;7;7;7;6;3;6;8;7;7;8;7;9;9;9;9;9;9;9;9;9;9;9;9;9
+178;Femenino;63;Sobre 60 años;Las Condes;Una vez por mes;0;0;0;0;1;0;0;0;;Imagenología;Ambulatorio;8;8;9;8;8;7;6;6;5;5;7;9;9;8;8;8;9;9;9;9;9;9;8;8
+179;Femenino;37;Entre 30 y 60 años;Lo Barnechea;Una vez por mes;0;0;0;0;1;0;0;0;;UTM;Ambulatorio;9;9;9;9;8;8;7;8;9;9;9;9;8;8;8;7;8;9;9;9;9;9;9;9
+180;Femenino;41;Entre 30 y 60 años;Las Condes;una vez por mes;0;0;0;0;0;1;0;0;;Vacunatorio;Ambulatorio;8;8;8;8;8;9;9;9;8;7;8;8;7;6;8;9;9;9;8;7;8;8;8;8
+181;Masculino;12;Menor a 18 años;Las Condes;Una vez al año;0;0;0;0;0;1;1;0;;Vacunatorio;Ambulatorio;8;8;8;9;9;9;9;8;8;8;8;8;7;9;9;9;9;8;8;9;9;9;9;9
+182;Masculino;35;Entre 30 y 60 años;Lo Barnechea;Una vez al año;0;0;0;0;0;0;1;0;;Vacunatorio;Ambulatorio;9;9;9;9;9;8;8;8;8;8;9;9;9;8;8;9;9;9;9;9;9;9;9;9
+183;Masculino;65;Sobre 60 años;Lo Barnechea;Una vez por semana;0;0;0;0;0;0;1;0;;UTM;Ambulatorio;8;8;7;7;7;8;6;8;5;7;5;3;5;4;7;7;5;5;7;7;8;8;8;8
+184;Femenino;22;Entre 18 y 30 años;Las Condes;Una vez por mes;0;0;0;0;1;1;0;0;;UTM;Ambulatorio;8;8;8;8;8;7;8;8;6;8;7;8;8;8;8;8;8;8;8;9;9;9;9;9
+185;Femenino;58;Entre 30 y 60 años;La Reina;Una vez por mes;0;0;0;0;0;0;1;0;Isapre ;Procedimientos;Ambulatorio;8;8;7;8;8;6;5;8;6;5;7;2;4;3;5;7;7;8;8;8;9;8;8;8
+186;Femenino;29;Entre 18 y 30 años;Vitacura;Una vez por mes;0;0;0;0;1;0;0;0;;Vacunatorio;Ambulatorio;4;9;8;2;8;7;8;9;7;3;8;8;3;;;7;7;;9;5;8;9;9;9
+187;Femenino;47;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;;Consultas;Ambulatorio;7;9;9;9;9;7;9;9;8;9;9;9;6;;5;9;9;9;9;9;9;9;9;9
+188;Femenino;47;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;;UTM;Ambulatorio;7;9;9;9;9;7;9;9;8;9;9;9;6;;5;9;9;9;9;9;9;9;9;9
+189;Femenino;49;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;1;0;0;0;;Imagenología;Ambulatorio;9;9;9;8;7;8;9;8;8;9;8;8;7;3;;8;9;;9;8;9;9;9;9
+190;Masculino;54;Entre 30 y 60 años;Lo Barnechea;Una vez por mes;0;0;0;0;0;0;1;0;;Procedimientos;Ambulatorio;5;8;8;8;8;7;8;6;5;6;7;2;7;5;7;7;9;7;8;8;8;9;9;9
+191;Masculino;54;Entre 30 y 60 años;Lo Barnechea;Una vez por mes;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;5;8;8;8;8;7;8;6;5;6;7;2;7;5;7;7;9;7;8;8;8;9;9;9
+192;Femenino;23;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;0;1;1;0;;Consultas;Ambulatorio;7;8;9;6;7;8;8;7;8;7;7;9;7;;9;9;9;9;8;9;9;9;9;9
+193;Femenino;23;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;0;1;1;0;;UTM;Ambulatorio;7;8;9;6;7;8;8;7;8;7;7;9;7;;9;9;9;9;8;9;9;9;9;9
+194;Femenino;23;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;0;1;1;0;;Imagenología;Ambulatorio;7;8;9;6;7;8;8;7;8;7;7;9;7;;9;9;9;9;8;9;9;9;9;9
+195;Masculino;65;Sobre 60 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;;UTM;Ambulatorio;8;8;8;6;7;9;9;7;9;8;9;8;;7;8;9;9;8;9;8;8;8;9;9
+196;Femenino;33;Entre 30 y 60 años;Calera de Tango;Una vez por mes;0;0;0;0;0;0;1;0;;Vacunatorio;Ambulatorio;9;9;9;8;9;9;9;9;9;9;9;9;9;;;9;9;6;9;9;9;9;9;9
+197;Femenino;52;Entre 30 y 60 años;Lo Barnechea;una vez por mes;0;0;0;1;0;0;1;0;;Procedimientos;Ambulatorio;6;8;8;5;8;9;5;5;6;7;8;4;8;7;7;8;8;9;9;9;9;9;8;8
+198;Femenino;20;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;1;1;0;0;;Consultas;Ambulatorio;9;9;9;9;8;8;8;7;8;8;9;9;9;9;9;9;9;9;8;8;9;9;9;9
+199;Masculino;28;Entre 18 y 30 años;Lo Barnechea;Primera visita;0;0;0;0;1;0;0;0;;Urgencia;Ambulatorio;7;8;8;5;6;8;8;8;9;9;9;9;8;8;8;8;8;9;9;9;9;9;9;9
+200;Masculino;35;Entre 30 y 60 años;Lo Barnechea;Una vez al año;0;0;0;0;1;0;0;0;;UTM;Ambulatorio;8;8;8;4;7;2;7;8;6;7;8;1;5;4;4;4;7;7;8;7;8;7;7;7
+201;Masculino;47;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;0;1;1;0;;Consultas;Ambulatorio;8;8;8;7;5;5;7;8;8;5;7;5;9;9;9;9;9;9;9;9;9;9;8;8
+202;Femenino;11;Menor a 18 años;Las Condes;una vez al mes;0;0;0;0;1;1;0;0;;Consultas;Ambulatorio;8;9;9;8;7;6;5;6;8;8;9;9;8;7;7;8;8;8;9;9;8;8;8;9
+203;Masculino;41;Entre 30 y 60 años;La Reina;Una vez al año;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;8;9;9;9;5;6;9;9;9;4;9;5;8;5;;9;9;;8;8;8;9;9;9
+204;Masculino;2;Menor a 18 años;Las Condes;Una vez por semana;0;0;0;0;0;1;1;0;;Urgencia;Ambulatorio;9;9;8;7;8;7;8;7;7;8;9;8;8;8;8;8;8;9;8;8;8;8;8;7
+205;Masculino;2;Menor a 18 años;Las Condes;Una vez por semana;0;0;0;0;0;1;1;0;;Imagenología;Ambulatorio;9;9;8;7;8;7;8;7;7;8;9;8;8;8;8;8;8;9;8;8;8;8;8;7
+206;Masculino;2;Menor a 18 años;Las Condes;Una vez por semana;0;0;0;0;0;1;1;0;;Procedimientos;Ambulatorio;9;9;8;7;8;7;8;7;7;8;9;8;8;8;8;8;8;9;8;8;8;8;8;7
+207;Masculino;58;Entre 30 y 60 años;Vitacura;una vez por mes;0;0;0;1;0;0;0;1;isapre ;Imagenología;Ambulatorio;7;6;8;6;7;8;6;6;5;5;4;4;6;2;7;6;6;7;6;7;8;9;9;9
+208;Femenino;35;Entre 30 y 60 años;Las Condes;una vez por mes;0;0;0;0;0;1;0;0;;Urgencia;Ambulatorio;8;8;8;7;9;9;9;8;5;4;7;8;8;8;9;9;8;8;6;8;8;9;9;9
+209;Femenino;16;Menor a 18 años;Las Condes;Una vez al año;0;0;0;0;1;1;0;1;Convenio Escolar;Procedimientos;Ambulatorio;8;8;8;9;9;9;8;8;8;7;8;8;9;9;7;8;8;6;9;8;8;9;9;9
+210;Femenino;16;Menor a 18 años;Las Condes;Una vez al año;0;0;0;0;1;1;0;1;Convenio Escolar;Imagenología;Ambulatorio;8;8;8;9;9;9;8;8;8;7;8;8;9;9;7;8;8;6;9;8;8;9;9;9
+211;Femenino;12;Menor a 18 años;Las Condes;una vez al mes;0;0;0;0;0;0;0;1;Convenio Escolar;Urgencia;Ambulatorio;8;9;9;8;6;8;8;8;7;7;8;5;5;;6;8;8;;8;9;9;9;9;9
+212;Masculino;54;Entre 30 y 60 años;La Reina;una vez al mes;0;0;0;0;1;0;1;0;;Consultas;Ambulatorio;7;7;8;9;8;6;5;6;8;8;6;2;8;5;5;9;9;6;7;7;9;9;9;9
+213;Femenino;40;Entre 30 y 60 años;Lo Barnechea;una vez por mes;0;0;0;0;1;0;0;0;;Imagenología;Ambulatorio;8;8;8;9;9;9;8;7;8;6;5;4;8;9;7;7;7;8;8;8;8;9;8;9
+214;Femenino;40;Entre 30 y 60 años;Lo Barnechea;una vez por mes;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;8;8;8;9;9;9;8;7;8;6;5;4;8;9;7;7;7;8;8;8;8;9;8;9
+215;Femenino;21;Entre 18 y 30 años;Las Condes;una vez por mes;0;0;0;0;0;0;1;0;;Imagenología;Ambulatorio;8;7;8;9;5;7;6;6;4;7;6;5;8;7;9;9;8;8;8;8;8;8;8;8
+216;Masculino;11;Menor a 18 años;Las Condes;Una vez por mes;0;0;0;0;0;1;0;0;;Imagenología;Ambulatorio;9;9;8;8;9;9;9;8;8;8;8;7;9;9;9;8;9;9;9;9;9;9;9;9
+217;Femenino;7;Menor a 18 años;Las Condes;Una vez por semana;0;0;0;0;0;1;0;1;Club Lectores;Vacunatorio;Ambulatorio;8;8;7;8;8;4;5;8;2;8;7;6;8;7;4;7;7;8;8;8;8;7;8;8
+218;Femenino;15;Menor a 18 años;Las Condes;Una vez por mes;0;0;0;0;0;1;1;0;;Procedimientos;Ambulatorio;9;9;8;8;8;7;8;6;8;8;8;9;6;4;8;8;7;5;8;8;9;9;9;9
+219;Masculino;17;Menor a 18 años;Vitacura;Una vez al año;0;0;0;0;1;0;1;0;;Procedimientos;Ambulatorio;7;8;8;7;7;5;4;3;4;5;6;1;6;7;8;8;8;8;9;9;9;7;7;7
+220;Masculino;25;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;8;8;8;9;9;8;7;8;9;9;9;8;7;5;6;7;8;9;9;9;9;9;9;9
+221;Femenino;47;Entre 30 y 60 años;Providencia;una vez al mes;0;0;0;0;1;0;1;0;;Consultas;Ambulatorio;8;8;9;9;9;9;9;9;9;8;9;9;9;9;9;9;9;9;9;9;9;9;9;9
+222;Femenino;8;Menor a 18 años;Las Condes;una vez al mes;0;0;0;0;0;1;0;1;Isapre ;UTM;Ambulatorio;8;9;8;9;9;9;9;8;8;7;8;6;9;9;7;7;8;6;8;8;9;9;9;9
+223;Femenino;39;Entre 30 y 60 años;Lo Barnechea;una vez al mes;0;0;0;0;1;0;0;0;;Urgencia;Ambulatorio;8;9;9;5;2;3;6;4;9;9;5;8;2;2;8;8;9;3;7;8;8;9;8;9
+224;Femenino;5;Menor a 18 años;Las Condes;Una vez por semana;0;0;0;0;0;1;1;0;;Consultas;Ambulatorio;8;8;9;7;8;6;5;4;7;8;5;6;6;8;8;6;7;8;8;9;9;9;9;9
+225;Femenino;5;Menor a 18 años;Las Condes;Una vez por semana;0;0;0;0;0;1;1;0;;Vacunatorio;Ambulatorio;8;8;9;7;8;6;5;4;7;8;5;6;6;8;8;6;7;8;8;9;9;9;9;9
+226;Masculino;57;Entre 30 y 60 años;Lo Barnechea;una vez al mes;0;0;0;0;0;0;1;0;;Imagenología;Ambulatorio;7;9;7;4;8;8;9;9;9;9;8;5;7;9;9;9;9;8;8;5;8;9;8;9
+227;Masculino;35;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;0;1;0;0;;Consultas;Ambulatorio;8;8;9;7;6;7;7;8;9;9;8;4;4;5;6;7;7;8;8;9;9;9;9;9
+228;Masculino;44;Entre 30 y 60 años;Vitacura;una vez al mes;0;0;0;0;1;0;1;0;;Consultas;Ambulatorio;8;8;9;6;8;6;7;8;8;8;9;7;8;;8;8;8;;7;5;8;7;7;7
+229;Masculino;15;Menor a 18 años;Las Condes;una vez al mes;0;0;0;0;0;1;0;1;Convenio Escolar;Urgencia;Ambulatorio;8;9;9;8;8;8;7;7;6;5;6;8;8;;;8;9;;6;6;8;8;8;9
+230;Masculino;17;Menor a 18 años;Las Condes;Primera visita;0;0;0;0;1;1;1;0;;Consultas;Ambulatorio;9;9;9;8;7;7;6;5;2;4;8;9;9;7;7;8;7;7;8;8;8;8;8;8
+231;Femenino;20;Entre 18 y 30 años;Lo Barnechea;Una vez por semana;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;8;8;8;8;9;6;5;4;7;8;8;9;7;7;5;8;7;5;8;7;8;9;9;9
+232;Femenino;4;Menor a 18 años;Las Condes;Primera visita;0;0;0;0;1;1;0;0;;Urgencia;Ambulatorio;9;8;9;9;9;9;8;8;8;7;8;9;9;9;9;9;9;;9;9;9;9;9;9
+233;Femenino;4;Menor a 18 años;Las Condes;Primera visita;0;0;0;0;1;1;0;0;;UTM;Ambulatorio;9;8;9;9;9;9;8;8;8;7;8;9;9;9;9;9;9;;9;9;9;9;9;9
+234;Masculino;64;Sobre 60 años;Las Condes;Una vez por semana;0;0;0;0;0;0;1;0;;Imagenología;Ambulatorio;8;8;8;7;7;8;5;4;6;8;5;5;7;8;8;9;9;9;9;9;9;9;8;8
+235;Masculino;16;Menor a 18 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;1;Club Lectores;Consultas;Ambulatorio;6;8;8;2;3;7;2;5;2;3;8;1;6;;;8;8;;7;8;9;7;5;5
+236;Masculino;58;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;1;1;0;0;;Consultas;Ambulatorio;8;8;8;9;9;9;8;7;7;8;8;8;9;9;9;9;9;9;9;9;8;9;9;9
+237;Masculino;41;Entre 30 y 60 años;La Reina;una vez al mes;0;0;0;0;1;0;1;0;;Consultas;Ambulatorio;8;8;9;9;7;7;6;6;7;8;9;6;7;7;7;8;8;7;8;9;9;9;9;9
+238;Masculino;41;Entre 30 y 60 años;La Reina;una vez al mes;0;0;0;0;1;0;1;0;;Imagenología;Ambulatorio;8;8;9;9;7;7;6;6;7;8;9;6;7;7;7;8;8;7;8;9;9;9;9;9
+239;Masculino;32;Entre 30 y 60 años;Lo Barnechea;una vez al mes;0;0;0;0;1;0;0;0;;Imagenología;Ambulatorio;9;9;7;6;7;7;8;8;9;9;9;7;9;;8;8;8;9;9;8;9;9;9;9
+240;Masculino;49;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;0;1;0;;Imagenología;Ambulatorio;7;8;8;5;5;4;8;5;6;6;5;8;7;4;;7;8;;8;7;7;7;8;8
+241;Femenino;36;Entre 30 y 60 años;Las Condes;Una vez por semana;0;0;0;0;1;1;0;0;;Consultas;Ambulatorio;8;9;9;2;5;5;9;7;2;5;8;8;8;5;6;8;6;7;9;8;8;8;9;9
+242;Femenino;36;Entre 30 y 60 años;Las Condes;Una vez por semana;0;0;0;0;1;1;0;0;;Procedimientos;Ambulatorio;8;9;9;2;5;5;9;7;2;5;8;8;8;5;6;8;6;7;9;8;8;8;9;9
+243;Femenino;45;Entre 30 y 60 años;Las Condes;Primera visita;0;0;0;0;1;1;0;0;;Consultas;Ambulatorio;8;9;9;7;9;8;8;8;7;8;9;7;8;;;8;8;;8;9;9;8;9;9
+244;Masculino;5;Menor a 18 años;Las Condes;una vez al mes;0;0;0;0;0;1;0;1;Convenio Escolar;Urgencia;Ambulatorio;9;9;8;8;7;7;6;5;7;6;9;5;8;7;5;8;9;5;8;9;9;8;8;8
+245;Femenino;49;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;1;1;0;0;;Imagenología;Ambulatorio;9;9;8;8;6;7;9;9;4;5;7;9;8;5;8;9;9;4;9;9;9;9;9;9
+246;Femenino;17;Menor a 18 años;Las Condes;Primera visita;0;0;0;0;0;1;1;0;;Consultas;Ambulatorio;8;9;9;8;7;5;8;9;9;5;7;6;7;8;8;8;8;7;7;9;9;9;9;9
+247;Masculino;15;Menor a 18 años;Lo Barnechea;Una vez al año;0;0;0;0;0;0;1;0;;Urgencia;Ambulatorio;9;9;7;6;6;6;6;7;8;6;5;5;7;7;8;8;8;7;8;8;8;8;8;8
+248;Femenino;52;Entre 30 y 60 años;Las Condes;Una vez por semana;0;0;0;0;0;1;1;0;;Consultas;Ambulatorio;9;8;8;7;7;7;7;8;7;7;6;8;8;7;7;8;8;8;8;5;7;8;8;8
+249;Femenino;52;Entre 30 y 60 años;Las Condes;Una vez por semana;0;0;0;0;0;1;1;0;;Procedimientos;Ambulatorio;9;8;8;7;7;7;7;8;7;7;6;8;8;7;7;8;8;8;8;5;7;8;8;8
+250;Masculino;38;Entre 30 y 60 años;La Reina;una vez al mes;0;0;0;1;0;0;0;0;;Imagenología;Ambulatorio;9;9;5;8;8;8;7;7;8;9;8;8;5;5;5;9;5;5;6;8;8;6;7;7
+251;Masculino;44;Entre 30 y 60 años;Las Condes;Primera visita;0;0;0;0;1;1;0;0;;Imagenología;Ambulatorio;9;9;9;7;7;8;6;7;8;8;9;4;6;7;4;7;7;8;6;7;8;7;7;8
+252;Masculino;44;Entre 30 y 60 años;Las Condes;Primera visita;0;0;0;0;1;1;0;0;;Consultas;Ambulatorio;9;9;9;7;7;8;6;7;8;8;9;4;6;7;4;7;7;8;6;7;8;7;7;8
+253;Masculino;40;Entre 30 y 60 años;Las Condes;Primera visita;0;0;0;0;1;0;1;0;;Consultas;Ambulatorio;9;9;9;5;9;6;9;9;9;8;8;8;7;;4;8;9;;9;9;9;9;9;9
+254;Masculino;52;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;7;8;8;7;8;1;4;7;7;6;7;8;5;;;8;8;;8;8;7;7;8;8
+255;Masculino;52;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;0;0;1;0;;Procedimientos;Ambulatorio;7;8;8;7;8;1;4;7;7;6;7;8;5;;;8;8;;8;8;7;7;8;8
+256;Masculino;35;Entre 30 y 60 años;Lo Barnechea;Una vez al año;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;7;8;8;7;8;4;4;5;7;7;5;7;7;5;2;5;7;;9;9;9;8;7;7
+257;Femenino;14;Menor a 18 años;Las Condes;Una vez al año;0;0;0;0;1;1;0;0;;UTM;Ambulatorio;8;8;8;6;7;7;8;6;5;8;8;8;8;7;5;8;8;7;8;9;9;8;8;8
+258;Femenino;4;Menor a 18 años;Las Condes;una vez al mes;0;1;0;0;0;1;1;0;;Vacunatorio;Ambulatorio;8;8;8;8;9;9;9;9;9;9;9;9;9;8;;8;8;;9;9;9;9;9;9
+259;Masculino;30;Entre 30 y 60 años;Lo Barnechea;Una vez al año;0;0;0;0;1;0;0;0;;Imagenología;Ambulatorio;9;9;5;7;4;6;6;5;7;7;4;1;8;2;7;7;5;6;9;8;9;6;5;6
+260;Masculino;30;Entre 30 y 60 años;Lo Barnechea;Una vez al año;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;9;9;5;7;4;6;6;5;7;7;4;1;8;2;7;7;5;6;9;8;9;6;5;6
+261;Masculino;43;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;Isapre ;Consultas;Ambulatorio;8;8;7;3;7;6;9;7;5;9;8;6;7;2;5;8;5;8;9;8;8;7;7;6
+262;Femenino;36;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;0;1;0;1;Convenio Escolar;Imagenología;Ambulatorio;8;8;7;6;4;4;7;7;7;7;4;5;5;6;2;8;6;8;6;8;9;8;8;8
+263;Femenino;48;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;1;1;1;0;;Consultas;Ambulatorio;9;9;9;8;9;8;9;9;8;9;9;6;9;9;9;9;9;9;9;9;9;8;9;9
+264;Femenino;48;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;1;1;1;0;;UTM;Ambulatorio;9;9;9;8;9;8;9;9;8;9;9;6;9;9;9;9;9;9;9;9;9;8;9;9
+265;Femenino;48;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;1;1;1;0;;Imagenología;Ambulatorio;9;9;9;8;9;8;9;9;8;9;9;6;9;9;9;9;9;9;9;9;9;8;9;9
+266;Masculino;26;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;1;1;0;0;;Consultas;Ambulatorio;9;9;9;9;9;8;8;8;9;9;9;9;9;9;9;9;9;8;8;8;9;9;9;9
+267;Masculino;21;Entre 18 y 30 años;Lo Barnechea;Primera visita;0;0;0;0;1;0;1;0;;Imagenología;Ambulatorio;8;8;7;6;5;4;5;5;6;6;7;7;7;6;6;8;8;6;8;8;8;8;7;7
+268;Masculino;21;Entre 18 y 30 años;Lo Barnechea;Primera visita;0;0;0;0;1;0;1;0;;Consultas;Ambulatorio;8;8;7;6;5;4;5;5;6;6;7;7;7;6;6;8;8;6;8;8;8;8;7;7
+269;Femenino;35;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;1;1;0;0;;Consultas;Ambulatorio;8;8;8;9;9;9;9;8;8;7;6;7;7;4;7;8;8;8;8;9;9;9;9;9
+270;Masculino;10;Menor a 18 años;Las Condes;una vez al mes;0;0;0;0;1;1;0;1;Convenio Escolar;Consultas;Ambulatorio;8;8;9;6;4;8;7;5;5;6;7;2;7;7;7;8;9;7;8;8;8;8;8;8
+271;Masculino;10;Menor a 18 años;Las Condes;una vez al mes;0;0;0;0;1;1;0;1;Convenio Escolar;Vacunatorio;Ambulatorio;8;8;9;6;4;8;7;5;5;6;7;2;7;7;7;8;9;7;8;8;8;8;8;8
+272;Masculino;25;Entre 18 y 30 años;Lo Barnechea;Una vez al año;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;9;9;9;8;8;8;7;8;8;5;8;8;9;9;9;8;7;8;8;8;8;9;9;9
+273;Femenino;2;Menor a 18 años;Las Condes;una vez al mes;0;0;0;0;0;1;1;0;;Vacunatorio;Ambulatorio;9;7;8;5;6;5;5;7;6;8;8;8;8;7;;8;8;;9;9;9;8;8;8
+274;Femenino;2;Menor a 18 años;Las Condes;una vez al mes;0;0;0;0;0;1;1;0;;Consultas;Ambulatorio;9;7;8;5;6;5;5;7;6;8;8;8;8;7;;8;8;;9;9;9;8;8;8
+275;Masculino;26;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;;Urgencia;Ambulatorio;9;8;7;5;6;6;7;8;8;7;8;8;7;4;8;8;8;8;9;9;9;9;8;8
+276;Masculino;26;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;;Imagenología;Ambulatorio;9;8;7;5;6;6;7;8;8;7;8;8;7;4;8;8;8;8;9;9;9;9;8;8
+277;Femenino;44;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;1;1;0;0;;Imagenología;Ambulatorio;9;9;9;9;9;9;9;9;9;7;9;9;8;;1;9;9;8;7;9;9;9;9;9
+278;Femenino;32;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;1;1;1;0;;Consultas;Ambulatorio;8;8;9;9;8;7;7;6;8;9;9;5;8;5;9;9;9;9;9;9;9;9;9;9
+279;Femenino;9;Menor a 18 años;Las Condes;una vez al mes;0;0;0;0;0;1;0;1;Convenio Escolar;Imagenología;Ambulatorio;8;8;9;9;9;8;8;8;8;7;7;7;7;7;7;9;9;9;9;9;9;9;9;9
+280;Masculino;21;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;;Vacunatorio;Ambulatorio;8;7;7;5;5;6;7;8;8;9;9;2;7;4;4;4;5;7;8;8;9;8;8;8
+281;Masculino;21;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;;Consultas;Ambulatorio;8;7;7;5;5;6;7;8;8;9;9;2;7;4;4;4;5;7;8;8;9;8;8;8
+282;Masculino;23;Entre 18 y 30 años;Lo Barnechea;Una vez por mes;0;0;0;0;1;0;1;0;;Consultas;Ambulatorio;8;8;8;9;9;6;6;5;5;9;9;8;8;;6;8;8;8;8;9;9;9;9;9
+283;Masculino;23;Entre 18 y 30 años;Lo Barnechea;Una vez por mes;0;0;0;0;1;0;1;0;;Imagenología;Ambulatorio;8;8;8;9;9;6;6;5;5;9;9;8;8;;6;8;8;8;8;9;9;9;9;9
+284;Masculino;8;Menor a 18 años;Las Condes;Una vez por mes;0;0;0;0;1;1;1;0;;Consultas;Ambulatorio;8;8;8;9;9;9;8;8;7;8;7;7;7;7;8;9;9;9;9;9;9;9;9;9
+285;Masculino;8;Menor a 18 años;Las Condes;Una vez por mes;0;0;0;0;1;1;1;0;;Imagenología;Ambulatorio;8;8;8;9;9;9;8;8;7;8;7;7;7;7;8;9;9;9;9;9;9;9;9;9
+286;Femenino;57;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;0;1;1;0;;Imagenología;Ambulatorio;8;7;7;5;8;4;4;7;8;5;5;6;7;7;8;8;8;7;8;9;9;8;7;8
+287;Femenino;30;Entre 30 y 60 años;Las Condes;Una vez por mes;0;0;0;0;1;0;0;0;;Imagenología;Ambulatorio;9;9;9;8;8;8;7;7;8;5;8;9;9;9;9;8;8;7;8;9;9;9;9;9
+288;Femenino;14;Menor a 18 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;1;Club Lectores;Urgencia;Ambulatorio;6;8;8;2;3;7;2;5;2;3;8;1;6;;;8;8;;7;8;9;7;5;5
+289;Femenino;57;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;0;1;1;0;;Procedimientos;Ambulatorio;8;8;8;7;5;5;7;8;8;5;7;5;9;9;9;9;9;9;9;9;9;9;8;8
+290;Femenino;32;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;;Imagenología;Ambulatorio;9;9;9;9;8;8;8;8;9;9;9;9;9;8;8;7;8;8;9;9;9;9;9;9
+291;Masculino;3;Menor a 18 años;Las Condes;Una vez por semana;0;0;0;0;0;1;1;0;;Consultas;Ambulatorio;8;8;8;8;9;4;5;5;6;8;9;5;8;;;8;8;;9;9;9;8;8;8
+292;Masculino;31;Entre 30 y 60 años;Lo Barnechea;una vez al mes;0;0;0;0;1;0;0;0;Convenio Escolar;Consultas;Ambulatorio;7;9;8;8;3;9;8;8;8;9;8;8;6;9;3;5;6;4;8;6;8;8;7;8
+293;Masculino;31;Entre 30 y 60 años;Lo Barnechea;una vez al mes;0;0;0;0;1;0;0;0;Convenio Escolar;Imagenología;Ambulatorio;7;9;8;8;3;9;8;8;8;9;8;8;9;6;3;5;6;4;8;6;8;8;7;8
+294;Femenino;21;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;1;1;0;0;;Imagenología;Ambulatorio;8;8;8;7;5;7;7;7;7;8;8;8;8;5;5;6;8;8;9;9;9;8;8;8
+295;Femenino;32;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;1;1;1;0;;Consultas;Ambulatorio;8;9;9;8;8;9;9;9;9;7;7;8;8;8;8;9;9;9;9;9;9;9;9;9
+296;Femenino;55;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;1;0;1;0;;Imagenología;Ambulatorio;8;7;7;5;5;7;5;6;6;7;4;4;5;5;;9;8;;8;8;8;7;8;7
+297;Femenino;33;Entre 30 y 60 años;Vitacura;Una vez por mes;0;0;0;0;1;0;0;1;Isapre ;Consultas;Ambulatorio;9;9;8;8;6;7;9;9;4;5;7;9;8;5;8;9;9;4;9;9;9;9;9;9
+298;Femenino;33;Entre 30 y 60 años;Vitacura;Una vez por mes;0;0;0;0;1;0;0;1;Isapre ;UTM;Ambulatorio;9;9;8;8;6;7;9;9;4;5;7;9;8;5;8;9;9;4;9;9;9;9;9;9
+299;Femenino;40;Entre 30 y 60 años;Las Condes;una vez por mes;0;0;0;0;1;1;0;0;;Consultas;Ambulatorio;8;8;7;8;8;5;4;5;6;5;5;7;8;8;5;8;6;8;8;8;9;8;7;8
+300;Masculino;55;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;1;0;1;0;;Consultas;Ambulatorio;8;8;8;8;9;8;9;8;9;9;9;9;9;;6;8;8;8;8;9;9;9;9;9
+301;Masculino;36;Entre 30 y 60 años;Las Condes;una vez por mes;0;0;0;0;0;1;0;1;Convenio Escolar;Consultas;Ambulatorio;8;9;4;6;5;8;8;8;8;8;9;8;9;5;5;9;9;6;7;8;9;8;9;9
+302;Femenino;41;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;Isapre ;Imagenología;Ambulatorio;8;8;7;3;7;6;9;7;5;9;8;6;7;2;5;8;5;8;9;8;8;7;7;6
+303;Femenino;40;Entre 30 y 60 años;Pirque;Primera visita;0;0;0;0;1;0;1;0;;Consultas;Ambulatorio;9;9;9;5;9;6;9;9;9;8;8;8;7;;4;8;9;;9;9;9;9;9;9
+304;Femenino;57;Entre 30 y 60 años;Lo Barnechea;una vez al mes;0;0;0;0;1;0;1;0;;Imagenología;Ambulatorio;8;8;8;7;7;5;5;6;5;8;7;5;8;7;8;8;8;8;8;8;8;8;8;8
+305;Femenino;36;Entre 30 y 60 años;Las Condes;Una vez por semana;0;0;0;0;0;1;0;0;;Imagenología;Ambulatorio;9;9;9;9;8;8;8;7;7;8;9;9;8;9;8;9;9;8;8;8;9;9;9;9
+306;Masculino;15;Menor a 18 años;Las Condes;Primera visita;0;0;0;0;1;1;0;0;;Consultas;Ambulatorio;8;8;7;7;6;5;6;4;3;7;7;8;8;;;7;8;;9;9;9;8;8;8
+307;Masculino;21;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;1;0;0;0;;Consultas;Ambulatorio;9;9;9;7;7;5;9;8;8;8;9;9;9;;4;9;9;1;9;9;9;9;9;9
+308;Femenino;41;Entre 30 y 60 años;Lo Barnechea;una vez por semana;0;0;0;0;1;0;1;0;;Consultas;Ambulatorio;8;8;9;9;7;7;6;6;7;8;9;6;7;7;7;8;8;7;8;9;9;9;9;9
+309;Femenino;41;Entre 30 y 60 años;Lo Barnechea;Una vez por semana;0;0;0;0;1;0;1;0;;UTM;Ambulatorio;8;8;9;9;7;7;6;;7;8;9;6;7;7;7;8;8;7;8;9;9;9;9;9
+310;Masculino;7;Menor a 18 años;Las Condes;una vez al mes;0;0;0;0;1;1;1;1;Convenio Escolar;Consultas;Ambulatorio;9;9;8;8;7;7;7;;7;8;8;8;9;9;8;7;8;9;9;9;9;9;9;9
+311;Femenino;38;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;1;1;0;0;;Imagenología;Ambulatorio;8;9;7;9;6;4;7;;7;8;2;8;9;5;;8;8;8;9;9;9;9;9;9
+312;Femenino;38;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;1;1;0;0;;Consultas;Ambulatorio;8;9;7;9;6;4;7;;7;8;2;8;9;5;;8;8;8;9;9;9;9;9;9
+313;Femenino;38;Entre 30 y 60 años;Las Condes;una vez al mes;0;0;0;0;1;1;0;0;;UTM;Ambulatorio;8;9;7;9;;4;7;;7;8;2;8;9;5;;8;8;8;9;9;9;9;9;9
+314;Masculino;36;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;1;0;0;;Consultas;Ambulatorio;9;9;6;6;;5;4;;5;6;7;5;5;6;6;6;6;7;8;8;7;7;7;7
+315;Masculino;26;Entre 18 y 30 años;Las Condes;Una vez al año;0;0;0;0;1;1;0;0;;Vacunatorio;Ambulatorio;9;9;9;9;;8;8;;9;9;9;9;9;9;9;9;9;8;8;8;9;9;9;9
+316;Femenino;15;Menor a 18 años;Las Condes;Una vez al año;0;0;0;0;1;1;0;0;;Imagenología;Ambulatorio;9;9;9;7;;7;9;;9;9;9;9;9;;9;9;9;9;9;4;9;9;9;9
+317;Femenino;15;Menor a 18 años;Las Condes;Una vez al año;0;0;0;0;1;1;0;0;;Urgencia;Ambulatorio;9;9;9;7;;7;9;;9;9;9;9;9;;9;9;9;9;9;4;9;9;9;9
+318;Masculino;38;Entre 30 y 60 años;Providencia;Primera visita;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;9;9;9;8;8;9;9;9;8;8;8;9;9;9;9;9;9;9;8;9;9;9;9;9
+319;Masculino;46;Entre 30 y 60 años;Las Condes;Una vez al año;0;0;0;0;0;0;1;0;;Consultas;Ambulatorio;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8;8
+320;Masculino;13;Menor a 18 años;Copiapó;Una vez al año;0;0;0;0;0;0;1;;;Consultas;Ambulatorio;9;9;7;6;6;6;6;6;6;6;6;6;8;5;8;9;9;5;7;8;8;8;9;9
