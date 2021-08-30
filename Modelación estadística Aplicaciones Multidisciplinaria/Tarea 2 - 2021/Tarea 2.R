@@ -41,8 +41,9 @@ data <- original %>%
     sexo = Sexo,
     rango = Rango.edad,
     frecuencia = Frecuencia,
-    area = Ã.rea,
-    X5 = X5, X8 = X8, X14 = X14, X18 = X18
+#    area = Ã.rea,
+    X5 = X5, X8 = X8, X14 = X14, X18 = X18,
+    A = A, B = B, C = C
   ) %>% mutate(
     sexo = as.factor(sexo),
     X5 = factor(X5, levels = likert_levels), 
@@ -73,18 +74,18 @@ data$frecuencia <- factor(data$frecuencia,
                                      "Una vez al mes", "Una vez por semana"))
 
 
-data$area <- fct_collapse(data$area,
-                      "Consultas" = "Consultas",
-                      "Imagenologia" = "ImagenologÃ­a", 
-                      "Procedimientos"  = "Procedimientos", 
-                      "Urgencia" = "Urgencia",
-                      "UTM" = "UTM",
-                      "Vacunatorio" = "Vacunatorio")
+#data$area <- fct_collapse(data$area,
+#                      "Consultas" = "Consultas",
+#                      "Imagenologia" = "ImagenologÃ­a", 
+#                      "Procedimientos"  = "Procedimientos", 
+#                      "Urgencia" = "Urgencia",
+#                      "UTM" = "UTM",
+#                      "Vacunatorio" = "Vacunatorio")
 
-data$area <- factor(data$area, 
-                          levels = c("Consultas", "Imagenologia",
-                                     "Procedimientos", "Urgencia",
-                                     "UTM", "Vacunatorio"))
+#data$area <- factor(data$area, 
+#                          levels = c("Consultas", "Imagenologia",
+#                                     "Procedimientos", "Urgencia",
+#                                     "UTM", "Vacunatorio"))
 
 summary(data$area)
 
@@ -196,6 +197,10 @@ likert.bar.plot(lkts_area, type = "bar", centered = TRUE) + theme_minimal()
 
 #Diagnostico del total de datos perdidos y su relacion con el resto de las variables
 
+?aggr
+# Graficamente, ¿Donde hay inconsistencias?
+aggr(data,numbers=T,sortVar=T)
+
 # Recibe reglas de validacion de datos según un criterio
 # La variable guarda la validación
 v5 = validator(data$X5>0 & data$X5<10)
@@ -219,167 +224,422 @@ summary(cf18)
 values(cf5)
 which(is.na(values(cf5)))
 
-# Graficamente, ¿Donde hay inconsistencias?
-aggr(varObjt, sortComb=TRUE, sortVar=TRUE,only.miss=TRUE, cex.axis=0.6, numbers=TRUE,cex.numbers=0.6)
-
 # Impacto de variables en la densidad de otras
 
 # X5
-varObjt <- varObjt %>% select(X5, X8, X14, X8, monto)
+likerts <- data %>% dplyr::select(X5, X8, X14, X18)
 
-pbox(varObjt, cex.numbers=1, numbers=T, cex.axis=1, par(mar=c(2.4,2.4,2.4,2.4)))
-# Test K-S para subconjunto de perdidos
-kruskal.test(varObjt$X5 ~ !is.na(varObjt$X8))
-kruskal.test(varObjt$X5 ~ is.na(varObjt$X14))
-kruskal.test(varObjt$X5 ~ is.na(varObjt$X18))
-kruskal.test(varObjt$X5 ~ is.na(varObjt$monto))
-?kruskal.test
-
-is.na(varObjt$X8)
+?pbox
+pbox(likerts, cex.axis=0.8)
 
 # X8
-varObjt <- varObjt %>% select(X8, X5, X14, X18, monto)
+likerts <- data %>% dplyr::select(X8, X5, X14, X18)
 
-pbox(varObjt, cex.numbers=1, numbers=T, cex.axis=0.8, par(mar=c(2.4,2.4,2.4,2.4)))
-# Test K-S para subconjunto de perdidos
-kruskal.test(data$X8 ~ is.na(data$X5))
-kruskal.test(data$X8 ~ is.na(data$X14))
-kruskal.test(data$X8 ~ is.na(data$X18))
-kruskal.test(data$X8 ~ is.na(data$monto))
+pbox(likerts, cex.numbers=1, numbers=T, cex.axis=0.8)
 
 # X14
-varObjt <- varObjt %>% select(X14, X8, X5, X18, monto)
+likerts <- data %>% dplyr::select(X14, X8, X5, X18)
 
-pbox(varObjt, cex.numbers=1, numbers=T, cex.axis=0.8, par(mar=c(2.4,2.4,2.4,2.4)))
-# Test K-S para subconjunto de perdidos
-kruskal.test(data$X14 ~ is.na(data$X5))
-kruskal.test(data$X14 ~ is.na(data$X8))
-kruskal.test(data$X14 ~ is.na(data$X18))
-kruskal.test(data$X14 ~ is.na(data$monto))
-
+pbox(likerts, cex.numbers=1, numbers=T, cex.axis=0.8)
 
 # X18
-varObjt <- varObjt %>% select(X18, X8, X5, X14, monto)
+likerts <- data %>% dplyr::select(X18, X5, X8, X14)
 
-pbox(varObjt, cex.numbers=1, numbers=T, cex.axis=0.8, par(mar=c(2.4,2.4,2.4,2.4)))
-# Test K-S para subconjunto de perdidos
-kruskal.test(data$X18 ~ is.na(data$X5))
-kruskal.test(data$X18 ~ is.na(data$X8))
-kruskal.test(data$X18 ~ is.na(data$X14))
-kruskal.test(data$X18 ~ is.na(data$monto))
-
-
-
-# MONTO
-varObjt <- varObjt %>% select(monto, X5, X8, X14, X18)
-
-pbox(varObjt, cex.numbers=1, numbers=T, cex.axis=0.8, par(mar=c(2.4,2.4,2.4,2.4)))
-# Test K-S para subconjunto de perdidos
-kruskal.test(data$monto ~ is.na(data$X5))
-kruskal.test(data$monto ~ is.na(data$X8))
-kruskal.test(data$monto ~ is.na(data$X14))
-kruskal.test(data$monto ~ is.na(data$X18))
-
+pbox(likerts, cex.numbers=1, numbers=T, cex.axis=0.8)
+  
 
 
 #############################
 ## P.3 IMPUTATION DE DATOS ##
 #############################
-# Como impacta en la variabilidad??
-# QQ-PLOT PERMITE NO SOLO VALIDAR MODELOS NORMALES, SI NO QUE OTRAS DISTRIBUCIONES
-# Test de K-S permite hacer bondad de ajuste con otras distribuciones
-# La idea es generar el valor perdido aleatoriamente con la distribucion de los datos
 
-
-#install.packages('simputation')
+# install.package("simputation")
 library(simputation)
 
-# Imputar con el promedio con su grupo correspondiente (factor)
-monto_imputado <- impute_lm(varObjt, monto~1)
-monto_imputado
-varObjt
+# Se convierten valores likerts (factors) a numericos
+likerts$X5 <- as.numeric(likerts$X5)
+likerts$X8 <- as.numeric(likerts$X8)
+likerts$X14 <- as.numeric(likerts$X14)
+likerts$X18 <- as.numeric(likerts$X18)
 
-monto_cs_imputacion
 
-monto_cs_imputacion <- data.frame(cbind(varObjt$monto, monto_imputado$monto))
-monto_cs_imputacion <- monto_cs_imputacion %>% rename("Sin imputar"=X1, 'Imputado con media'=X2)
+#### Se realiza la imputación por mediana
+?impute_median
+data$X5 <- as.numeric(data$X5)
+median(as.numeric(data$X5), na.rm = T)
+median_imputation <- impute_median(likerts, X5+X8+X14+X18~1)
+summary(median_imputation)
+summary(likerts)
 
-summary(monto_cs_imputacion)
-sd(monto_cs_imputacion$`Sin imputar`, na.rm=TRUE)
-sd(monto_cs_imputacion$`Imputado con media`)
 
-monto_cs_imputacion_fact <- melt(monto_cs_imputacion) 
+#### Revisión de distribución
 
-monto_cs_imputacion_fact
+## X5
 
-qplot(x=value, geom="density", group=factor(variable), colour=factor(variable),
-      fill=factor(variable),alpha=I(.5),data=monto_cs_imputacion_fact) +
+imputation_x5 <- data.frame(likerts$X5, median_imputation$X5)
+imputation_x5_melt <- melt(imputation_x5)
+
+ggplot(data = imputation_x5_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
   theme_minimal() +
-  xlab("$") + ylab("densidad") 
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
 
 
-# Imputar con la mediana
-X_imputados <- impute_median(varObjt,X5~is.na(data$X14))
-summary(X_imputados[,-5])
-summary(varObjt[,-5])
+## X8
 
-is.na(data$X14)
+imputation_x8 <- data.frame(likerts$X8, median_imputation$X8)
+imputation_x8_melt <- melt(imputation_x8)
+
+ggplot(data = imputation_x8_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
 
 
-#### Imputacion por grupo de asuencia 
-X_imputados <- impute_median(varObjt,X5~1)
-summary(X_imputados[,-5])
-summary(varObjt[,-5])
+## X14
+
+imputation_x14 <- data.frame(sin_imputacion = likerts$X14, con_imputacion = median_imputation$X14)
+imputation_x14_melt <- melt(imputation_x14)
+
+ggplot(data = imputation_x14_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
 
 
-#### Imputación aleatoria
-rand.imput <-function(x,a,b,c,d,e,f,g,h,i,tot){
-  missing <- (is.na(x)) #vector booleano
-  n.missing <- sum(missing)#Numero de NA's
-  x.obs <- x[!missing]#Datos no NA
-  imputed <- x
-  imputed[missing] <- sample(c(1,2,3,4,5,6,7,8,9), 
-                             prob=c(a/tot,b/tot,c/tot,d/tot,e/tot,
-                                    f/tot,g/tot,h/tot,i/tot), 
-                             size=1)
-  return(imputed)
-}
+## X18
 
-summary(data$X5)
-table(data$X5)
-complete.X5 <- rand.imput(data$X5)
-summary(complete.X5)
+imputation_x18 <- data.frame(sin_imputacion = likerts$X18, con_imputacion = median_imputation$X18)
+imputation_x18_melt <- melt(imputation_x18)
 
-summary(data$X8)
-table(data$X8)
-complete.X8 <- rand.imput(data$X8,0,3,2,8,30,33,55,107,72,310)
-summary(complete.X8)
+ggplot(data = imputation_x18_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
 
+
+
+
+
+#### Se realiza la imputación por mediana agrupado por grupo etario y frecuencia
+
+# Se convierten valores likerts (factors) a numericos
+data$X5 <- as.numeric(data$X5)
+data$X8 <- as.numeric(data$X8)
+data$X14 <- as.numeric(data$X14)
+data$X18 <- as.numeric(data$X18)
+
+?impute_median
+data$X5 <- as.numeric(data$X5)
+median(as.numeric(data$X5), na.rm = T)
+median_imputation_grouped <- impute_median(data, X5+X8+X14+X18~frecuencia)
+summary(median_imputation_grouped)
+summary(likerts)
+
+
+#### Revisión de distribución
+
+## X5
+
+imputation_x5 <- data.frame(likerts$X5, median_imputation_grouped$X5)
+imputation_x5_melt <- melt(imputation_x5)
+
+ggplot(data = imputation_x5_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+
+## X8
+
+imputation_x8 <- data.frame(likerts$X8, median_imputation_grouped$X8)
+imputation_x8_melt <- melt(imputation_x8)
+
+ggplot(data = imputation_x8_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+
+## X14
+
+imputation_x14 <- data.frame(likerts$X14, median_imputation_grouped$X14)
+imputation_x14_melt <- melt(imputation_x14)
+
+ggplot(data = imputation_x14_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+summary(median_imputation_grouped$X14)
+sd(median_imputation_grouped$X18)
 summary(data$X14)
-table(data$X14)
-complete.X14 <- rand.imput(data$X14,5,14,8,19,41,14,43,36,44,320-96)
-summary(complete.X14)
+sd(data$X18, na.rm = T)
 
-summary(data$X18)
-table(data$X18)
-complete.X18 <- rand.imput(data$X18,4,4,4,10,19,25,32,79,68,320-75)
-summary(complete.X18)
+## X18
 
-# Imputacion aleatoria de la variable monto
-rand.imput <-function(x){
-  missing <- (is.na(x)) #vector booleano
-  n.missing <- sum(missing)#Numero de NA's
-  x.obs <- x[!missing]#Datos no NA
-  imputed <- x
-  imputed[missing] <- sample(x.obs,n.missing,replace = T)
-  #Se extrae una muestra aleatoria conocida y se remplazan estos en los NA
-  return(imputed)}
+imputation_x18 <- data.frame(likerts$X18, median_imputation_grouped$X18)
+imputation_x18_melt <- melt(imputation_x18)
 
-complete.monto <- rand.imput(data$monto)
-summary(data$monto)
-sd(data$monto, na.rm=TRUE)
-summary(complete.monto)
-sd(complete.monto)
+ggplot(data = imputation_x18_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+
+
+
+
+#### IMPUTACION POR METODO HOT-DECK
+
+library(VIM)
+
+# Definimos un dataframe auxiliar para no perder la variable original
+hot_deck <- hotdeck(likerts)
+
+# Verificamos que no existen faltantes
+sum(is.na(hot_deck$X14))
+
+## X5
+hot_deck_x5 <- data.frame(likerts$X5, hot_deck$X5)
+hot_deck_x5_melt <- melt(hot_deck_x5)
+
+ggplot(data = hot_deck_x5_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+## X8
+
+hot_deck_x8 <- data.frame(likerts$X8, hot_deck$X8)
+hot_deck_x8_melt <- melt(hot_deck_x8)
+
+ggplot(data = hot_deck_x8_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+
+## X14
+
+hot_deck_x14 <- data.frame(likerts$X14, hot_deck$X14)
+hot_deck_x14_melt <- melt(hot_deck_x14)
+
+ggplot(data = hot_deck_x14_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+summary(median_imputation_grouped$X14)
+sd(median_imputation_grouped$X18)
+summary(data$X14)
+sd(data$X18, na.rm = T)
+
+## X18
+
+hot_deck_x18 <- data.frame(likerts$X18, hot_deck$X18)
+hot_deck_x18_melt <- melt(hot_deck_x18)
+
+ggplot(data = hot_deck_x18_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+
+
+
+
+#### IMPUTACION POR METODO REGRESION LINEAL
+
+data$X5 <- as.numeric(data$X5)
+data$X8 <- as.numeric(data$X8)
+data$X14 <- as.numeric(data$X14)
+data$X18 <- as.numeric(data$X18)
+data$A <- as.numeric(data$A)
+data$B <- as.numeric(data$B)
+data$C <- as.numeric(data$C)
+
+regression <- impute_lm(data, X5+X8+X14+X18~A+B+C)
+summary(regression)
+summary(likerts)
+
+
+
+
+## X5
+regression_x5 <- data.frame(likerts$X5, ceiling(regression$X5))
+regression_melt <- melt(regression_x5)
+
+ggplot(data = regression_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+## X8
+
+regression_x8 <- data.frame(likerts$X8, ceiling(regression$X8))
+regression_x8_melt <- melt(regression_x8)
+
+ggplot(data = regression_x8_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+
+## X14
+
+regression_x14 <- data.frame(likerts$X14, ceiling(regression$X14))
+regression_x14_melt <- melt(regression_x14)
+
+ggplot(data = regression_x14_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+summary(median_imputation_grouped$X14)
+sd(median_imputation_grouped$X18)
+summary(data$X14)
+sd(data$X18, na.rm = T)
+
+## X18
+
+regression_x18 <- data.frame(likerts$X18, ceiling(regression$X18))
+regression_x18_melt <- melt(regression_x18)
+
+ggplot(data = regression_x18_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+
 
 
 #############################################
