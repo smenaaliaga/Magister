@@ -487,6 +487,14 @@ kruskal.test(tiempo_2 ~ turno, data = data_corr)
 
 
 ################
+## PREGUNTA 3 ##
+################
+
+vis_miss()
+
+
+
+################
 ## PREGUNTA 4 ##
 ################
 

@@ -87,7 +87,7 @@ data$frecuencia <- factor(data$frecuencia,
 #                                     "Procedimientos", "Urgencia",
 #                                     "UTM", "Vacunatorio"))
 
-summary(data$area)
+# summary(data$area)
 
 ####################################
 ## ANALISIS EXPLORATORIO DE DATOS ##
@@ -265,9 +265,9 @@ likerts$X18 <- as.numeric(likerts$X18)
 
 #### Se realiza la imputación por mediana
 ?impute_median
-data$X5 <- as.numeric(data$X5)
 median(as.numeric(data$X5), na.rm = T)
 median_imputation <- impute_median(likerts, X5+X8+X14+X18~1)
+
 summary(median_imputation)
 summary(likerts)
 
@@ -458,6 +458,7 @@ ggplot(data = imputation_x18_melt,
 
 library(VIM)
 
+?hotdeck
 # Definimos un dataframe auxiliar para no perder la variable original
 hot_deck <- hotdeck(likerts)
 
@@ -556,6 +557,13 @@ data$B <- as.numeric(data$B)
 data$C <- as.numeric(data$C)
 
 regression <- impute_lm(data, X5+X8+X14+X18~A+B+C)
+regression <- regression %>% mutate(
+  X5 = ceiling(X5),
+  X8 = ceiling(X8),
+  X14 = ceiling(X14),
+  X18 = ceiling(X18),
+)
+
 summary(regression)
 summary(likerts)
 
@@ -646,78 +654,196 @@ ggplot(data = regression_x18_melt,
 ## P.4 IMPACTO EN LA RELACION DE VARIABLES ##
 #############################################
 #Se puede usar pearson para ver correlación con la variable monto prestacion
-# Variables tipo Likert 
+# Variables tipo Likert
 
-# X5
+# install.packages("ggcorrplot")
+library(ggcorrplot)
+
+data$X5 <- as.numeric(data$X5)
+data$X8 <- as.numeric(data$X8)
+data$X14 <- as.numeric(data$X14)
+data$X18 <- as.numeric(data$X18)
+
+
+# DATOS SI IMPUTAR
+
+likerts <- data %>% select(X5 = X5, X8 = X8, X14 = X14, X18 = X18)
+
+?cor
+# correlaciones
+corr_sin_imputar <- cor(likerts, method = "spearman", use = "complete.obs")
+corr_sin_imputar
+
+?ggcorrplot
+# corplot
+ggcorrplot(corr_sin_imputar, hc.order = TRUE, type = "lower")
+
+
+?cor.test
 cor.test(data$X5, data$X8, method="spearman")
-cor.test(X_imputados$X5, X_imputados$X8, method="spearman")
-cor.test(complete.X5, complete.X8, method="spearman")
-
 cor.test(data$X5, data$X14, method="spearman")
-cor.test(X_imputados$X5, X_imputados$X14, method="spearman")
-cor.test(complete.X5, complete.X14, method="spearman")
-
 cor.test(data$X5, data$X18, method="spearman")
-cor.test(X_imputados$X5, X_imputados$X18, method="spearman")
-cor.test(complete.X5, complete.X18, method="spearman")
-
-
-# X8
-cor.test(data$X8, data$X5, method="spearman")[4]
-cor.test(X_imputados$X8, X_imputados$X5, method="spearman")[4]
-cor.test(complete.X8, complete.X5, method="spearman")[4]
-
-cor.test(data$X8, data$X14, method="spearman")[4]
-cor.test(X_imputados$X8, X_imputados$X14, method="spearman")[4]
-cor.test(complete.X8, complete.X14, method="spearman")[4]
-
-cor.test(data$X8, data$X18, method="spearman")[4]
-cor.test(X_imputados$X8, X_imputados$X18, method="spearman")[4]
-cor.test(complete.X8, complete.X18, method="spearman")[4]
-
-
-# X14
-cor.test(data$X14, data$X5, method="spearman")[4]
-cor.test(X_imputados$X14, X_imputados$X5, method="spearman")[4]
-cor.test(complete.X14, complete.X5, method="spearman")[4]
-
-cor.test(data$X14, data$X8, method="spearman")[4]
-cor.test(X_imputados$X14, X_imputados$X8, method="spearman")[4]
-cor.test(complete.X14, complete.X8, method="spearman")[4]
-
-cor.test(data$X14, data$X18, method="spearman")[4]
-cor.test(X_imputados$X14, X_imputados$X18, method="spearman")[4]
-cor.test(complete.X14, complete.X18, method="spearman")[4]
-
-
-# X18
-cor.test(data$X18, data$X5, method="spearman")[4]
-cor.test(X_imputados$X18, X_imputados$X5, method="spearman")[4]
-cor.test(complete.X18, complete.X5, method="spearman")[4]
-
-cor.test(data$X18, data$X8, method="spearman")[4]
-cor.test(X_imputados$X18, X_imputados$X8, method="spearman")[4]
-cor.test(complete.X18, complete.X8, method="spearman")[4]
-
-cor.test(data$X18, data$X14, method="spearman")[4]
-cor.test(X_imputados$X18, X_imputados$X14, method="spearman")[4]
-cor.test(complete.X18, complete.X14, method="spearman")[4]
+cor.test(data$X8, data$X14, method="spearman")
+cor.test(data$X8, data$X18, method="spearman")
+cor.test(data$X14, data$X18, method="spearman")
 
 
 
-#############################################
-## P.5 IMPUTACION POR REGRESION PARA MONTO ##
-#############################################
+# IMPUTACIÓN POR MEDIANA
 
-reg_monto = impute_lm(X_imputados,monto~X5+X8+X14+X18)
+# correlaciones
+corr_mediana <- cor(median_imputation, method = "spearman", use = "complete.obs")
+corr_mediana
 
-summary(data$monto)
-sd(data$monto, na.rm=TRUE)
+# corplot
+ggcorrplot(corr_mediana, hc.order = TRUE, type = "lower")
 
-summary(monto_imputado$monto)
-sd(monto_imputado$monto, na.rm=TRUE)
 
-summary(reg_monto$monto) 
-sd(reg_monto$monto, na.rm=TRUE)
+
+# IMPUTACIÓN POR MEDIANA AGRUPADA POR FRECUENCIA
+
+median_imputation_grouped
+
+# correlaciones
+corr_mediana_agrupada <- cor(median_imputation_grouped[,4:7], method = "spearman")
+corr_mediana_agrupada
+
+# corplot
+ggcorrplot(corr_mediana_agrupada, hc.order = TRUE, type = "lower")
+
+
+
+
+# IMPUTACION POR HOT DECK
+
+hot_deck
+
+# correlaciones
+corr_hot_deck <- cor(hot_deck[,1:4], method = "spearman")
+corr_hot_deck
+
+# corplot
+ggcorrplot(corr_hot_deck, hc.order = TRUE, type = "lower")
+
+
+
+# IMPUTACION POR REGRESION LINEAL
+
+regression
+
+# correlaciones
+corr_regression <- cor(regression[,4:7], method = "spearman", use = "complete.obs")
+corr_regression
+
+# corplot
+ggcorrplot(corr_regression, hc.order = TRUE, type = "lower")
+
+
+
+
+
+#######################################
+## P.5 METODO DE IMPUTACION MULTIPLE ##
+#######################################
+
+# install.packages("mice")
+library(mice)
+
+?mice
+mice <- mice(data[ ,4:7], seed=2018, m = 30)
+
+complete.mice <- mice::complete(mice)
+
+
+
+### REVISION DE LA DISTRIBUCION ANTES Y DESPUES DE LA IMPUTACION POR MICE
+
+
+## X5
+
+mice_x5 <- data.frame(data$X5, complete.mice$X5)
+mice_x5_melt <- melt(mice_x5)
+
+ggplot(data = mice_x5_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+
+## X8
+
+mice_x8 <- data.frame(data$X8, complete.mice$X8)
+mice_x8_melt <- melt(mice_x8)
+
+ggplot(data = mice_x8_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
   
 
+## X14
+
+mice_x14 <- data.frame(data$X14, complete.mice$X14)
+mice_x14_melt <- melt(mice_x14)
+
+ggplot(data = mice_x14_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+
+
+## X18
+
+mice_x18 <- data.frame(data$X18, complete.mice$X18)
+mice_x18_melt <- melt(mice_x18)
+
+ggplot(data = mice_x18_melt, 
+       mapping = aes(x=value, fill = variable)) +
+  geom_bar(position="dodge") +
+  theme_minimal() +
+  xlab("Escala") + ylab("Frecuencia") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+
+
+### REVISION DE LAS CORRELACIONES ANTES Y DESPUES DE LA IMPUTACION POR MICE
+
+regression
+
+# correlaciones
+corr_mice <- cor(complete.mice, method = "spearman")
+corr_mice
+
+# corplot
+ggcorrplot(corr_mice, hc.order = TRUE, type = "lower")
