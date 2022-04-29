@@ -10,6 +10,7 @@ setwd('Documents/Magister/Metodos Multivariados, Clasificacion y Pronostico/Tare
 # install.packages('caret')
 # install.packages('performanceEstimation')
 # install.packages('ROCit')
+# install.packages('ResourceSelection')
 library(tidyverse)
 library(xtable)
 library(GGally)
@@ -20,14 +21,16 @@ library(MASS)
 library(caret)
 library(performanceEstimation)
 library(ROCit)
-# Exportacion de datos
+library(ResourceSelection)
+  # Exportacion de datos
 data = read.csv("churn-analysis.csv", header = TRUE, sep=";")
 # tipos de datos en df
 str(data)
 # Transformacion de datos character a factor
 data <- data %>% 
   mutate_if(is.character, as.factor) %>% 
-  mutate(area.code = as.factor(area.code))
+  mutate(area.code = as.factor(area.code)) %>% 
+  select(-c('phone.number'))
 ## AED ##
 #########
 # Resumen estadistico todas las variables
@@ -194,3 +197,88 @@ plot(perf,colorize=TRUE)
 
 ## Regresion Logistica ##
 #########################
+# Estandarizacion de variables cuantitativas
+standard_norm = function(x){
+  z = (x - mean(x))/sd(x)
+}
+data_std <- data %>% 
+  select_if(is.numeric) %>%
+  mutate_if(is.numeric, standard_norm)
+# Variables dummmy de categoricas
+data_factor <- data %>% 
+  select_if(is.factor)%>%
+  select(-churn)
+model_dummy <- dummyVars(~.,data=data_factor)
+data_dummy <- predict(model_dummy,data_factor)
+data_dummy <- data_dummy%>% data.frame()
+# Variable de respuesta Y
+target <- data %>% 
+  mutate(churn = case_when(churn=="yes"~1,TRUE~0)) %>%
+  select(churn)
+# Append estandarizacion y dummys
+data_fin <- data_std %>% 
+  add_column(data_dummy) %>%
+  add_column(data$churn)
+data_fin <- dplyr::rename(data_fin, churn = c('data$churn'))
+names(data_fin)
+# Correlacion de variables numericas
+data_std %>% cor(method="kendall")
+data_std %>% cor(method="pearson")
+data_std %>% cor(method="spearman")
+# Entrenamiento y testing
+index = sample(dim(data_fin)[1],floor(dim(data_fin)[1])*0.7)
+train = data_fin[index,]
+test = data_fin[-index,]
+table(train$churn)
+table(test$churn)
+# BALANCE DE LA VARIABLE RESPUESTA
+train %>% group_by(churn) %>% summarise(conteo = n())
+test %>% group_by(churn) %>% summarise(conteo = n())
+table(train$churn)
+table(test$churn)
+## Seleccion de modelo
+modelo_nulo = glm(churn~1,family = "binomial", data=train)
+modelo_completo = glm(churn~.,family = "binomial", data=train)
+# FORWARD
+step(modelo_nulo,scope=(list(lower = modelo_nulo, upper = modelo_completo)),data=train,direction = "forward")
+# BACKWARD
+step(modelo_completo,data=train,direction = "backward")
+# STEPWISE
+step(modelo_nulo,scope=(list(lower = modelo_nulo, upper = modelo_completo)),data=train, direction = "both")
+# Modelo de regresion logistica optimo conmetodo FORWARD
+modelo_rl <- glm(churn ~ total.day.charge + international.plan.no + customer.service.calls + total.eve.minutes + voice.mail.plan.no + total.intl.charge + total.intl.calls + total.night.charge + state.MT + state.VA + state.TX + state.CA + state.WA + state.MI + state.NJ + state.SC + state.MS + state.RI + state.HI + state.MA,
+                data = train, family = "binomial")
+# coeficientes del modelo (betas)
+xtable(as.table(
+  modelo_rl$coefficients
+), type = "latex")
+modelo_rl$coefficients
+#  Validacion del modelo
+library(InformationValue)
+ks_stat(actuals = modelo_rl$y,predictedScores = fitted(modelo_rl))
+# Matriz de confusión
+predicciones <- predict(modelo_rl,
+                        newdata = test%>%select(-c(churn)), 
+                        type="response")
+predicciones
+test$predicciones <- predicciones
+test$predicciones <- ifelse(test$predicciones>0.6,'True','False')
+rl_mc <- caret::confusionMatrix(as.factor(test$predicciones),
+                                as.factor(test$churn),
+                                mode = "everything")
+rl_mc
+xtable(as.table(
+  rl_mc
+), type = "latex")
+# Curva ROC
+library(ROCR)
+pred = predict(modelo_rl,newdata = test%>%select(-c(churn)), type="response")
+roc_pred = prediction(pred, test$churn)
+roc_perf = performance(roc_pred, measure = "tpr", x.measure = "fpr")
+# GCurva ROC
+plot(roc_perf,
+     colorize = TRUE,
+     text.adj = c(-0.2,1.7),
+     print.cutoffs.at = seq(0,1,0.1))
+abline(a=0,b=1,col="brown")
+
