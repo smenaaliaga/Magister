@@ -1,0 +1,872 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Clase 2.ipynb",
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# SVM en sklearn"
+      ],
+      "metadata": {
+        "id": "7NKBIYu8Xqjf"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "En el siguiente link se encuentra la información de los diferentes modelos de SVM que vimos en clases disponibles a través de sklearn (en python):\n",
+        "\n",
+        "https://scikit-learn.org/stable/modules/classes.html#module-sklearn.svm\n",
+        "\n",
+        "Recordar que estamos trabajando solo los problemas de clasificación, por ende, no considerar aquellos modelos que hagan referencia al problema de regresión."
+      ],
+      "metadata": {
+        "id": "YqLTbbvCW9fx"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Transformar texto a vector numérico"
+      ],
+      "metadata": {
+        "id": "B_lm9Ip7XvPb"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Para transformar un texto en un vector numérico, haremos uso del modelo BERT,  ya implementado y disponible en el hub de TensorFlow.\n",
+        "\n",
+        "Cabe destacar, que dado los objetivos del curso, haremos uso de su implementación como caja negra y no se comentará su funcionalidad interna.\n",
+        "\n",
+        "No obstante, para mayor información de su implementación y repositorios con los códigos disponibles (del modelo ya entrenado), lo pueden encontrar en el siguiente link:\n",
+        "\n",
+        "https://tfhub.dev/google/collections/bert\n",
+        "\n",
+        "Además, el modelo BERT necesita un texto preprocesado para poder funcionar, el cual lo obtendremos a través de la siguiente implementación (también usado como caja negra):\n",
+        "\n",
+        "https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3\n",
+        "\n",
+        "\n",
+        "A continuación, se muestran los pasos que debe hacer antes de alimentar un modelo de clasificación (en nuestro caso, una SVM).\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "wYM6cYkek-5W"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "3O9w-Sp_eltU"
+      },
+      "outputs": [],
+      "source": [
+        "# 1er paso: debe instalar el módulo tensorflow_text \n",
+        "##\n",
+        "##  - Si trabaja en la nube a través de Google Colab, este paso debe hacerlo cada vez que se conecta a una máquina\n",
+        "##\n",
+        "##  - Si trabaja localmente en su computador, este paso debe hacerlo una sola vez.\n",
+        "##    - Si es la primera vez que va utilizar un módulo (package) que tiene como parte de su nombre \"tensorflow\", \n",
+        "##      es probable que deba instalar previamente el módulo tensorflow y tensorflow_hub\n",
+        "## \n",
+        " \n",
+        "!pip install tensorflow_text"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# 2do paso: importe los siguientes módulos:\n",
+        "\n",
+        "import pandas as pd\n",
+        "import numpy as np\n",
+        "import tensorflow_hub as hub\n",
+        "import tensorflow_text as text"
+      ],
+      "metadata": {
+        "id": "TtLvhsPWetXV"
+      },
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# 3er paso: Lea el archivo con los datos de entrenamiento\n",
+        "##\n",
+        "##  - Si trabaja de forma local, puede leer el archivo de forma local como:\n",
+        "##       df1 = pd.read_csv(\"train.csv\")\n",
+        "##\n",
+        "##  - Si trabaja en Google Colab, puede usar el siguiente código para leer el archivo: \n",
+        "\n",
+        "import io\n",
+        "from google.colab import files\n",
+        "\n",
+        "uploaded = files.upload()\n",
+        "df1 = pd.read_csv(io.BytesIO(uploaded['train.csv']))"
+      ],
+      "metadata": {
+        "colab": {
+          "resources": {
+            "http://localhost:8080/nbextensions/google.colab/files.js": {
+              "data": "Ly8gQ29weXJpZ2h0IDIwMTcgR29vZ2xlIExMQwovLwovLyBMaWNlbnNlZCB1bmRlciB0aGUgQXBhY2hlIExpY2Vuc2UsIFZlcnNpb24gMi4wICh0aGUgIkxpY2Vuc2UiKTsKLy8geW91IG1heSBub3QgdXNlIHRoaXMgZmlsZSBleGNlcHQgaW4gY29tcGxpYW5jZSB3aXRoIHRoZSBMaWNlbnNlLgovLyBZb3UgbWF5IG9idGFpbiBhIGNvcHkgb2YgdGhlIExpY2Vuc2UgYXQKLy8KLy8gICAgICBodHRwOi8vd3d3LmFwYWNoZS5vcmcvbGljZW5zZXMvTElDRU5TRS0yLjAKLy8KLy8gVW5sZXNzIHJlcXVpcmVkIGJ5IGFwcGxpY2FibGUgbGF3IG9yIGFncmVlZCB0byBpbiB3cml0aW5nLCBzb2Z0d2FyZQovLyBkaXN0cmlidXRlZCB1bmRlciB0aGUgTGljZW5zZSBpcyBkaXN0cmlidXRlZCBvbiBhbiAiQVMgSVMiIEJBU0lTLAovLyBXSVRIT1VUIFdBUlJBTlRJRVMgT1IgQ09ORElUSU9OUyBPRiBBTlkgS0lORCwgZWl0aGVyIGV4cHJlc3Mgb3IgaW1wbGllZC4KLy8gU2VlIHRoZSBMaWNlbnNlIGZvciB0aGUgc3BlY2lmaWMgbGFuZ3VhZ2UgZ292ZXJuaW5nIHBlcm1pc3Npb25zIGFuZAovLyBsaW1pdGF0aW9ucyB1bmRlciB0aGUgTGljZW5zZS4KCi8qKgogKiBAZmlsZW92ZXJ2aWV3IEhlbHBlcnMgZm9yIGdvb2dsZS5jb2xhYiBQeXRob24gbW9kdWxlLgogKi8KKGZ1bmN0aW9uKHNjb3BlKSB7CmZ1bmN0aW9uIHNwYW4odGV4dCwgc3R5bGVBdHRyaWJ1dGVzID0ge30pIHsKICBjb25zdCBlbGVtZW50ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnc3BhbicpOwogIGVsZW1lbnQudGV4dENvbnRlbnQgPSB0ZXh0OwogIGZvciAoY29uc3Qga2V5IG9mIE9iamVjdC5rZXlzKHN0eWxlQXR0cmlidXRlcykpIHsKICAgIGVsZW1lbnQuc3R5bGVba2V5XSA9IHN0eWxlQXR0cmlidXRlc1trZXldOwogIH0KICByZXR1cm4gZWxlbWVudDsKfQoKLy8gTWF4IG51bWJlciBvZiBieXRlcyB3aGljaCB3aWxsIGJlIHVwbG9hZGVkIGF0IGEgdGltZS4KY29uc3QgTUFYX1BBWUxPQURfU0laRSA9IDEwMCAqIDEwMjQ7CgpmdW5jdGlvbiBfdXBsb2FkRmlsZXMoaW5wdXRJZCwgb3V0cHV0SWQpIHsKICBjb25zdCBzdGVwcyA9IHVwbG9hZEZpbGVzU3RlcChpbnB1dElkLCBvdXRwdXRJZCk7CiAgY29uc3Qgb3V0cHV0RWxlbWVudCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKG91dHB1dElkKTsKICAvLyBDYWNoZSBzdGVwcyBvbiB0aGUgb3V0cHV0RWxlbWVudCB0byBtYWtlIGl0IGF2YWlsYWJsZSBmb3IgdGhlIG5leHQgY2FsbAogIC8vIHRvIHVwbG9hZEZpbGVzQ29udGludWUgZnJvbSBQeXRob24uCiAgb3V0cHV0RWxlbWVudC5zdGVwcyA9IHN0ZXBzOwoKICByZXR1cm4gX3VwbG9hZEZpbGVzQ29udGludWUob3V0cHV0SWQpOwp9CgovLyBUaGlzIGlzIHJvdWdobHkgYW4gYXN5bmMgZ2VuZXJhdG9yIChub3Qgc3VwcG9ydGVkIGluIHRoZSBicm93c2VyIHlldCksCi8vIHdoZXJlIHRoZXJlIGFyZSBtdWx0aXBsZSBhc3luY2hyb25vdXMgc3RlcHMgYW5kIHRoZSBQeXRob24gc2lkZSBpcyBnb2luZwovLyB0byBwb2xsIGZvciBjb21wbGV0aW9uIG9mIGVhY2ggc3RlcC4KLy8gVGhpcyB1c2VzIGEgUHJvbWlzZSB0byBibG9jayB0aGUgcHl0aG9uIHNpZGUgb24gY29tcGxldGlvbiBvZiBlYWNoIHN0ZXAsCi8vIHRoZW4gcGFzc2VzIHRoZSByZXN1bHQgb2YgdGhlIHByZXZpb3VzIHN0ZXAgYXMgdGhlIGlucHV0IHRvIHRoZSBuZXh0IHN0ZXAuCmZ1bmN0aW9uIF91cGxvYWRGaWxlc0NvbnRpbnVlKG91dHB1dElkKSB7CiAgY29uc3Qgb3V0cHV0RWxlbWVudCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKG91dHB1dElkKTsKICBjb25zdCBzdGVwcyA9IG91dHB1dEVsZW1lbnQuc3RlcHM7CgogIGNvbnN0IG5leHQgPSBzdGVwcy5uZXh0KG91dHB1dEVsZW1lbnQubGFzdFByb21pc2VWYWx1ZSk7CiAgcmV0dXJuIFByb21pc2UucmVzb2x2ZShuZXh0LnZhbHVlLnByb21pc2UpLnRoZW4oKHZhbHVlKSA9PiB7CiAgICAvLyBDYWNoZSB0aGUgbGFzdCBwcm9taXNlIHZhbHVlIHRvIG1ha2UgaXQgYXZhaWxhYmxlIHRvIHRoZSBuZXh0CiAgICAvLyBzdGVwIG9mIHRoZSBnZW5lcmF0b3IuCiAgICBvdXRwdXRFbGVtZW50Lmxhc3RQcm9taXNlVmFsdWUgPSB2YWx1ZTsKICAgIHJldHVybiBuZXh0LnZhbHVlLnJlc3BvbnNlOwogIH0pOwp9CgovKioKICogR2VuZXJhdG9yIGZ1bmN0aW9uIHdoaWNoIGlzIGNhbGxlZCBiZXR3ZWVuIGVhY2ggYXN5bmMgc3RlcCBvZiB0aGUgdXBsb2FkCiAqIHByb2Nlc3MuCiAqIEBwYXJhbSB7c3RyaW5nfSBpbnB1dElkIEVsZW1lbnQgSUQgb2YgdGhlIGlucHV0IGZpbGUgcGlja2VyIGVsZW1lbnQuCiAqIEBwYXJhbSB7c3RyaW5nfSBvdXRwdXRJZCBFbGVtZW50IElEIG9mIHRoZSBvdXRwdXQgZGlzcGxheS4KICogQHJldHVybiB7IUl0ZXJhYmxlPCFPYmplY3Q+fSBJdGVyYWJsZSBvZiBuZXh0IHN0ZXBzLgogKi8KZnVuY3Rpb24qIHVwbG9hZEZpbGVzU3RlcChpbnB1dElkLCBvdXRwdXRJZCkgewogIGNvbnN0IGlucHV0RWxlbWVudCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKGlucHV0SWQpOwogIGlucHV0RWxlbWVudC5kaXNhYmxlZCA9IGZhbHNlOwoKICBjb25zdCBvdXRwdXRFbGVtZW50ID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQob3V0cHV0SWQpOwogIG91dHB1dEVsZW1lbnQuaW5uZXJIVE1MID0gJyc7CgogIGNvbnN0IHBpY2tlZFByb21pc2UgPSBuZXcgUHJvbWlzZSgocmVzb2x2ZSkgPT4gewogICAgaW5wdXRFbGVtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ2NoYW5nZScsIChlKSA9PiB7CiAgICAgIHJlc29sdmUoZS50YXJnZXQuZmlsZXMpOwogICAgfSk7CiAgfSk7CgogIGNvbnN0IGNhbmNlbCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2J1dHRvbicpOwogIGlucHV0RWxlbWVudC5wYXJlbnRFbGVtZW50LmFwcGVuZENoaWxkKGNhbmNlbCk7CiAgY2FuY2VsLnRleHRDb250ZW50ID0gJ0NhbmNlbCB1cGxvYWQnOwogIGNvbnN0IGNhbmNlbFByb21pc2UgPSBuZXcgUHJvbWlzZSgocmVzb2x2ZSkgPT4gewogICAgY2FuY2VsLm9uY2xpY2sgPSAoKSA9PiB7CiAgICAgIHJlc29sdmUobnVsbCk7CiAgICB9OwogIH0pOwoKICAvLyBXYWl0IGZvciB0aGUgdXNlciB0byBwaWNrIHRoZSBmaWxlcy4KICBjb25zdCBmaWxlcyA9IHlpZWxkIHsKICAgIHByb21pc2U6IFByb21pc2UucmFjZShbcGlja2VkUHJvbWlzZSwgY2FuY2VsUHJvbWlzZV0pLAogICAgcmVzcG9uc2U6IHsKICAgICAgYWN0aW9uOiAnc3RhcnRpbmcnLAogICAgfQogIH07CgogIGNhbmNlbC5yZW1vdmUoKTsKCiAgLy8gRGlzYWJsZSB0aGUgaW5wdXQgZWxlbWVudCBzaW5jZSBmdXJ0aGVyIHBpY2tzIGFyZSBub3QgYWxsb3dlZC4KICBpbnB1dEVsZW1lbnQuZGlzYWJsZWQgPSB0cnVlOwoKICBpZiAoIWZpbGVzKSB7CiAgICByZXR1cm4gewogICAgICByZXNwb25zZTogewogICAgICAgIGFjdGlvbjogJ2NvbXBsZXRlJywKICAgICAgfQogICAgfTsKICB9CgogIGZvciAoY29uc3QgZmlsZSBvZiBmaWxlcykgewogICAgY29uc3QgbGkgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdsaScpOwogICAgbGkuYXBwZW5kKHNwYW4oZmlsZS5uYW1lLCB7Zm9udFdlaWdodDogJ2JvbGQnfSkpOwogICAgbGkuYXBwZW5kKHNwYW4oCiAgICAgICAgYCgke2ZpbGUudHlwZSB8fCAnbi9hJ30pIC0gJHtmaWxlLnNpemV9IGJ5dGVzLCBgICsKICAgICAgICBgbGFzdCBtb2RpZmllZDogJHsKICAgICAgICAgICAgZmlsZS5sYXN0TW9kaWZpZWREYXRlID8gZmlsZS5sYXN0TW9kaWZpZWREYXRlLnRvTG9jYWxlRGF0ZVN0cmluZygpIDoKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJ24vYSd9IC0gYCkpOwogICAgY29uc3QgcGVyY2VudCA9IHNwYW4oJzAlIGRvbmUnKTsKICAgIGxpLmFwcGVuZENoaWxkKHBlcmNlbnQpOwoKICAgIG91dHB1dEVsZW1lbnQuYXBwZW5kQ2hpbGQobGkpOwoKICAgIGNvbnN0IGZpbGVEYXRhUHJvbWlzZSA9IG5ldyBQcm9taXNlKChyZXNvbHZlKSA9PiB7CiAgICAgIGNvbnN0IHJlYWRlciA9IG5ldyBGaWxlUmVhZGVyKCk7CiAgICAgIHJlYWRlci5vbmxvYWQgPSAoZSkgPT4gewogICAgICAgIHJlc29sdmUoZS50YXJnZXQucmVzdWx0KTsKICAgICAgfTsKICAgICAgcmVhZGVyLnJlYWRBc0FycmF5QnVmZmVyKGZpbGUpOwogICAgfSk7CiAgICAvLyBXYWl0IGZvciB0aGUgZGF0YSB0byBiZSByZWFkeS4KICAgIGxldCBmaWxlRGF0YSA9IHlpZWxkIHsKICAgICAgcHJvbWlzZTogZmlsZURhdGFQcm9taXNlLAogICAgICByZXNwb25zZTogewogICAgICAgIGFjdGlvbjogJ2NvbnRpbnVlJywKICAgICAgfQogICAgfTsKCiAgICAvLyBVc2UgYSBjaHVua2VkIHNlbmRpbmcgdG8gYXZvaWQgbWVzc2FnZSBzaXplIGxpbWl0cy4gU2VlIGIvNjIxMTU2NjAuCiAgICBsZXQgcG9zaXRpb24gPSAwOwogICAgZG8gewogICAgICBjb25zdCBsZW5ndGggPSBNYXRoLm1pbihmaWxlRGF0YS5ieXRlTGVuZ3RoIC0gcG9zaXRpb24sIE1BWF9QQVlMT0FEX1NJWkUpOwogICAgICBjb25zdCBjaHVuayA9IG5ldyBVaW50OEFycmF5KGZpbGVEYXRhLCBwb3NpdGlvbiwgbGVuZ3RoKTsKICAgICAgcG9zaXRpb24gKz0gbGVuZ3RoOwoKICAgICAgY29uc3QgYmFzZTY0ID0gYnRvYShTdHJpbmcuZnJvbUNoYXJDb2RlLmFwcGx5KG51bGwsIGNodW5rKSk7CiAgICAgIHlpZWxkIHsKICAgICAgICByZXNwb25zZTogewogICAgICAgICAgYWN0aW9uOiAnYXBwZW5kJywKICAgICAgICAgIGZpbGU6IGZpbGUubmFtZSwKICAgICAgICAgIGRhdGE6IGJhc2U2NCwKICAgICAgICB9LAogICAgICB9OwoKICAgICAgbGV0IHBlcmNlbnREb25lID0gZmlsZURhdGEuYnl0ZUxlbmd0aCA9PT0gMCA/CiAgICAgICAgICAxMDAgOgogICAgICAgICAgTWF0aC5yb3VuZCgocG9zaXRpb24gLyBmaWxlRGF0YS5ieXRlTGVuZ3RoKSAqIDEwMCk7CiAgICAgIHBlcmNlbnQudGV4dENvbnRlbnQgPSBgJHtwZXJjZW50RG9uZX0lIGRvbmVgOwoKICAgIH0gd2hpbGUgKHBvc2l0aW9uIDwgZmlsZURhdGEuYnl0ZUxlbmd0aCk7CiAgfQoKICAvLyBBbGwgZG9uZS4KICB5aWVsZCB7CiAgICByZXNwb25zZTogewogICAgICBhY3Rpb246ICdjb21wbGV0ZScsCiAgICB9CiAgfTsKfQoKc2NvcGUuZ29vZ2xlID0gc2NvcGUuZ29vZ2xlIHx8IHt9OwpzY29wZS5nb29nbGUuY29sYWIgPSBzY29wZS5nb29nbGUuY29sYWIgfHwge307CnNjb3BlLmdvb2dsZS5jb2xhYi5fZmlsZXMgPSB7CiAgX3VwbG9hZEZpbGVzLAogIF91cGxvYWRGaWxlc0NvbnRpbnVlLAp9Owp9KShzZWxmKTsK",
+              "ok": true,
+              "headers": [
+                [
+                  "content-type",
+                  "application/javascript"
+                ]
+              ],
+              "status": 200,
+              "status_text": ""
+            }
+          },
+          "base_uri": "https://localhost:8080/",
+          "height": 74
+        },
+        "id": "Ab-VyZwye5zM",
+        "outputId": "afba7883-41cd-4c34-a2ac-a2fc55bcf8e8"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<IPython.core.display.HTML object>"
+            ],
+            "text/html": [
+              "\n",
+              "     <input type=\"file\" id=\"files-e50caab8-0fee-46be-8f62-948b9f8c2fe1\" name=\"files[]\" multiple disabled\n",
+              "        style=\"border:none\" />\n",
+              "     <output id=\"result-e50caab8-0fee-46be-8f62-948b9f8c2fe1\">\n",
+              "      Upload widget is only available when the cell has been executed in the\n",
+              "      current browser session. Please rerun this cell to enable.\n",
+              "      </output>\n",
+              "      <script src=\"/nbextensions/google.colab/files.js\"></script> "
+            ]
+          },
+          "metadata": {}
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Saving train.csv to train.csv\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Opcional: Puede hacer una pequeña revisión para chequear el fomato de su dataframe\n",
+        "#           e identificar como se llama la columna que contiene los textos que necesita transformar.\n",
+        "\n",
+        "df1"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 424
+        },
+        "id": "31YmERK0gDMa",
+        "outputId": "af0038c8-aafa-4987-8266-00d292b04122"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "         id keyword location  \\\n",
+              "0         1     NaN      NaN   \n",
+              "1         4     NaN      NaN   \n",
+              "2         5     NaN      NaN   \n",
+              "3         6     NaN      NaN   \n",
+              "4         7     NaN      NaN   \n",
+              "...     ...     ...      ...   \n",
+              "7608  10869     NaN      NaN   \n",
+              "7609  10870     NaN      NaN   \n",
+              "7610  10871     NaN      NaN   \n",
+              "7611  10872     NaN      NaN   \n",
+              "7612  10873     NaN      NaN   \n",
+              "\n",
+              "                                                   text  target  \n",
+              "0     Our Deeds are the Reason of this #earthquake M...       1  \n",
+              "1                Forest fire near La Ronge Sask. Canada       1  \n",
+              "2     All residents asked to 'shelter in place' are ...       1  \n",
+              "3     13,000 people receive #wildfires evacuation or...       1  \n",
+              "4     Just got sent this photo from Ruby #Alaska as ...       1  \n",
+              "...                                                 ...     ...  \n",
+              "7608  Two giant cranes holding a bridge collapse int...       1  \n",
+              "7609  @aria_ahrary @TheTawniest The out of control w...       1  \n",
+              "7610  M1.94 [01:04 UTC]?5km S of Volcano Hawaii. htt...       1  \n",
+              "7611  Police investigating after an e-bike collided ...       1  \n",
+              "7612  The Latest: More Homes Razed by Northern Calif...       1  \n",
+              "\n",
+              "[7613 rows x 5 columns]"
+            ],
+            "text/html": [
+              "\n",
+              "  <div id=\"df-dff91551-b466-469e-8232-df858b57949e\">\n",
+              "    <div class=\"colab-df-container\">\n",
+              "      <div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>id</th>\n",
+              "      <th>keyword</th>\n",
+              "      <th>location</th>\n",
+              "      <th>text</th>\n",
+              "      <th>target</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>1</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>Our Deeds are the Reason of this #earthquake M...</td>\n",
+              "      <td>1</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>4</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>Forest fire near La Ronge Sask. Canada</td>\n",
+              "      <td>1</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>5</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>All residents asked to 'shelter in place' are ...</td>\n",
+              "      <td>1</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>6</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>13,000 people receive #wildfires evacuation or...</td>\n",
+              "      <td>1</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>7</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>Just got sent this photo from Ruby #Alaska as ...</td>\n",
+              "      <td>1</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>...</th>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7608</th>\n",
+              "      <td>10869</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>Two giant cranes holding a bridge collapse int...</td>\n",
+              "      <td>1</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7609</th>\n",
+              "      <td>10870</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>@aria_ahrary @TheTawniest The out of control w...</td>\n",
+              "      <td>1</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7610</th>\n",
+              "      <td>10871</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>M1.94 [01:04 UTC]?5km S of Volcano Hawaii. htt...</td>\n",
+              "      <td>1</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7611</th>\n",
+              "      <td>10872</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>Police investigating after an e-bike collided ...</td>\n",
+              "      <td>1</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7612</th>\n",
+              "      <td>10873</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>The Latest: More Homes Razed by Northern Calif...</td>\n",
+              "      <td>1</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "<p>7613 rows × 5 columns</p>\n",
+              "</div>\n",
+              "      <button class=\"colab-df-convert\" onclick=\"convertToInteractive('df-dff91551-b466-469e-8232-df858b57949e')\"\n",
+              "              title=\"Convert this dataframe to an interactive table.\"\n",
+              "              style=\"display:none;\">\n",
+              "        \n",
+              "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\"viewBox=\"0 0 24 24\"\n",
+              "       width=\"24px\">\n",
+              "    <path d=\"M0 0h24v24H0V0z\" fill=\"none\"/>\n",
+              "    <path d=\"M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z\"/><path d=\"M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z\"/>\n",
+              "  </svg>\n",
+              "      </button>\n",
+              "      \n",
+              "  <style>\n",
+              "    .colab-df-container {\n",
+              "      display:flex;\n",
+              "      flex-wrap:wrap;\n",
+              "      gap: 12px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert {\n",
+              "      background-color: #E8F0FE;\n",
+              "      border: none;\n",
+              "      border-radius: 50%;\n",
+              "      cursor: pointer;\n",
+              "      display: none;\n",
+              "      fill: #1967D2;\n",
+              "      height: 32px;\n",
+              "      padding: 0 0 0 0;\n",
+              "      width: 32px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert:hover {\n",
+              "      background-color: #E2EBFA;\n",
+              "      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "      fill: #174EA6;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert {\n",
+              "      background-color: #3B4455;\n",
+              "      fill: #D2E3FC;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert:hover {\n",
+              "      background-color: #434B5C;\n",
+              "      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
+              "      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
+              "      fill: #FFFFFF;\n",
+              "    }\n",
+              "  </style>\n",
+              "\n",
+              "      <script>\n",
+              "        const buttonEl =\n",
+              "          document.querySelector('#df-dff91551-b466-469e-8232-df858b57949e button.colab-df-convert');\n",
+              "        buttonEl.style.display =\n",
+              "          google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "\n",
+              "        async function convertToInteractive(key) {\n",
+              "          const element = document.querySelector('#df-dff91551-b466-469e-8232-df858b57949e');\n",
+              "          const dataTable =\n",
+              "            await google.colab.kernel.invokeFunction('convertToInteractive',\n",
+              "                                                     [key], {});\n",
+              "          if (!dataTable) return;\n",
+              "\n",
+              "          const docLinkHtml = 'Like what you see? Visit the ' +\n",
+              "            '<a target=\"_blank\" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'\n",
+              "            + ' to learn more about interactive tables.';\n",
+              "          element.innerHTML = '';\n",
+              "          dataTable['output_type'] = 'display_data';\n",
+              "          await google.colab.output.renderOutput(dataTable, element);\n",
+              "          const docLink = document.createElement('div');\n",
+              "          docLink.innerHTML = docLinkHtml;\n",
+              "          element.appendChild(docLink);\n",
+              "        }\n",
+              "      </script>\n",
+              "    </div>\n",
+              "  </div>\n",
+              "  "
+            ]
+          },
+          "metadata": {},
+          "execution_count": 4
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# 4to paso: Vamos a crear dos variables que cargaran en memoria dos funciones para transformar el texto\n",
+        "##\n",
+        "##   - preprocessor: \"objeto\" que se encargará de transformar el texto en el formato que necesita el modelo BERT para funcionar\n",
+        "##   - encoder: \"objeto\" que será el modelo BERT y se alimentará del resultado de preprocessor, retornando el texto transformado en un vector numérico.\n",
+        "\n",
+        "preprocessor = hub.load(\"https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3\")\n",
+        "encoder = hub.load(\"https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-2_H-128_A-2/2\")"
+      ],
+      "metadata": {
+        "id": "d3pfA9QegQ1O"
+      },
+      "execution_count": 5,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Opcional: A modo de ejemplo, sabiendo que la columna \"text\" en el dataframe df1 tiene los textos que se desean transformar,\n",
+        "#           vamos a revisar que contiene los dos primeros textos:\n",
+        "\n",
+        "df1.text[0:2]"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "6TvKwRmlhvY-",
+        "outputId": "61efc64b-37f4-460a-d91a-eb601e072842"
+      },
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "0    Our Deeds are the Reason of this #earthquake M...\n",
+              "1               Forest fire near La Ronge Sask. Canada\n",
+              "Name: text, dtype: object"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 6
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# 5to paso: Vamos a usar el objeto preprocessor, y guardamos su resultado en la variable embedding\n",
+        "##   A modo de ejemplo para su revisión, solo vamos a transformar dos textos:\n",
+        "\n",
+        "embedding = preprocessor(df1.text[0:2])"
+      ],
+      "metadata": {
+        "id": "8J6wVWligwvr"
+      },
+      "execution_count": 7,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# 6to paso: Vamos a codificar el texto con el modelo BERT:\n",
+        "##   - Fijarse que el objeto encoder recibe como argumento la variable embedding (resultado de preprocessor)\n",
+        "##   - Copiar el siguiente código de forma literal\n",
+        "\n",
+        "pooled_output = encoder(embedding)[\"pooled_output\"]"
+      ],
+      "metadata": {
+        "id": "4Bx8w1EBh6G7"
+      },
+      "execution_count": 8,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Opcional: revisamos el contenido de la variable pooled_output, el cual tiene dos vectores de 128 dimensiones\n",
+        "##\n",
+        "##    - Dos vectores, porque le pasamos solo dos textos\n",
+        "##    - 128 dimensiones, porque el modelo BERT utilizado convierte cualquier texto (independiente del largo) en un vector numérico de 128 dimensiones.\n",
+        "\n",
+        "pooled_output"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Yh6YlJOsisby",
+        "outputId": "0bfb5c1c-0128-401f-86d2-6710687a0e15"
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "<tf.Tensor: shape=(2, 128), dtype=float32, numpy=\n",
+              "array([[-0.9999422 ,  0.0856778 , -0.9968958 ,  0.7461104 , -0.99655366,\n",
+              "        -0.8599363 , -0.99270433, -0.95105624,  0.02091197, -0.04219284,\n",
+              "        -0.8703805 , -0.03192063, -0.1286135 ,  0.9999795 , -0.74280214,\n",
+              "        -0.7429072 ,  0.86922085,  0.19967955, -0.6407021 ,  0.8855908 ,\n",
+              "         0.97448367, -0.14208691,  0.89472884, -0.06514141, -0.99979454,\n",
+              "        -0.09988743, -0.9998618 ,  0.48331338,  0.99718624, -0.01227856,\n",
+              "         0.05217856, -0.08589873, -0.3659172 , -0.8826159 , -0.23403226,\n",
+              "         0.9997974 , -0.9637221 ,  0.01825328,  0.9964412 , -0.9989769 ,\n",
+              "         0.99088115,  0.9754531 , -0.99804497,  0.9470798 , -0.99903446,\n",
+              "        -0.07783378, -0.99423325,  0.99405426,  0.8552652 ,  0.9951016 ,\n",
+              "         0.951531  , -0.66702175, -0.03756839,  0.34777927,  0.9974035 ,\n",
+              "         0.99470425, -0.9690298 , -0.07211009,  0.9875161 , -0.98895365,\n",
+              "         0.08140312,  0.65406966, -0.9917333 ,  0.81586236, -0.10132851,\n",
+              "        -0.9999611 ,  0.7054094 , -0.46697402,  0.819211  ,  0.98933107,\n",
+              "         0.9943566 ,  0.26768076, -0.9991894 , -0.07776543,  0.770049  ,\n",
+              "        -0.9990352 , -0.5099365 , -0.00319766, -0.8922581 ,  0.04318538,\n",
+              "         0.19215442, -0.10147803, -0.60931593, -0.99970496,  0.99986464,\n",
+              "        -0.9974374 ,  0.9537635 , -0.87470263, -0.9289973 ,  0.41811177,\n",
+              "        -0.61151016,  0.9485427 , -0.25891608,  0.9949365 ,  0.7458871 ,\n",
+              "         0.8643055 , -0.78301615, -0.24221565, -0.9976731 , -0.9577677 ,\n",
+              "        -0.9233347 ,  0.6727515 , -0.9987217 , -0.42415598, -0.9995389 ,\n",
+              "        -0.79839593, -0.9994914 , -0.9540987 ,  0.73402095,  0.99205065,\n",
+              "         0.99251693,  0.94821036, -0.86739194,  0.9938426 , -0.9998827 ,\n",
+              "        -0.03988186,  0.63039607, -0.27323663,  0.21943761, -0.9974226 ,\n",
+              "         0.08857521, -0.99994564, -0.84787333,  0.96784294, -0.9990014 ,\n",
+              "         0.9817266 ,  0.9961311 ,  0.99718165],\n",
+              "       [-0.99999774,  0.03694205, -0.99783856,  0.88704133, -0.99803823,\n",
+              "        -0.26543745, -0.890874  , -0.8230206 ,  0.0711994 ,  0.09832431,\n",
+              "        -0.23023005, -0.02996132, -0.10414182,  0.9999996 , -0.8380408 ,\n",
+              "        -0.33360296,  0.53791076,  0.03670592, -0.8886682 ,  0.52632236,\n",
+              "         0.93463767,  0.07510816,  0.59935087, -0.26129353, -0.99899405,\n",
+              "        -0.04898454, -0.9996173 , -0.21974446,  0.91147846,  0.0788402 ,\n",
+              "         0.04095859, -0.21222548, -0.97452706, -0.48574463,  0.5184299 ,\n",
+              "         0.99706227, -0.9963683 , -0.03775369,  0.9934043 , -0.998333  ,\n",
+              "         0.96983397,  0.9130375 , -0.9933943 ,  0.9605688 , -0.99991715,\n",
+              "        -0.12691185, -0.9922156 ,  0.9980537 ,  0.90454274,  0.9973212 ,\n",
+              "         0.61114234, -0.7084265 ,  0.01559386,  0.64820504,  0.94205165,\n",
+              "         0.9986451 , -0.97509146, -0.91547626,  0.96553427, -0.36075437,\n",
+              "         0.09980978,  0.9081465 , -0.96007454,  0.9716788 , -0.7982657 ,\n",
+              "        -0.9999989 , -0.65671235,  0.3683048 ,  0.9153881 ,  0.86816394,\n",
+              "         0.9967372 ,  0.22510546, -0.98116887, -0.05292592,  0.90407294,\n",
+              "        -0.98385316, -0.87798285,  0.13787214, -0.66229993,  0.11917624,\n",
+              "         0.16795012,  0.03272689, -0.9806147 , -0.9870466 ,  0.999449  ,\n",
+              "        -0.99327475, -0.2743136 , -0.9426524 , -0.92899513, -0.31877023,\n",
+              "        -0.84951067,  0.9855998 , -0.53984314,  0.86371696,  0.43073785,\n",
+              "         0.5612916 , -0.43084973,  0.93779206, -0.9998551 , -0.5021729 ,\n",
+              "        -0.987372  ,  0.91700405, -0.99956584, -0.9789964 , -0.9979495 ,\n",
+              "        -0.09846023, -0.999802  , -0.99557155,  0.02965865,  0.56092995,\n",
+              "         0.99939185,  0.3175198 , -0.7946983 ,  0.997146  , -0.9999974 ,\n",
+              "        -0.07048148, -0.93428403,  0.12673034,  0.10142609, -0.99950343,\n",
+              "         0.12803744, -0.9999777 , -0.91335887,  0.8583443 , -0.9998604 ,\n",
+              "         0.998909  ,  0.4743687 ,  0.98108315]], dtype=float32)>"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 9
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# 7mo paso: El contenido de la variable pooled_output es una estructura de datos de tipo tensorflow.\n",
+        "#           Para transformarlo a un dataframe y usarlo de forma tradicional con los modelos clásicos, \n",
+        "#           ejecutamos la siguiente linea de código:\n",
+        "\n",
+        "dataX = pd.DataFrame(pooled_output.numpy())"
+      ],
+      "metadata": {
+        "id": "qh41OHjjj8n4"
+      },
+      "execution_count": 10,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Opcional:  Ahora la variable dataX es un dataframe y podemos revisar su dimensionalidad y visualizarlo:\n",
+        "dataX.shape"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "9syxLIg9kz_T",
+        "outputId": "7d19ca36-4d26-49f2-96ab-659c4743d042"
+      },
+      "execution_count": 11,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "(2, 128)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 11
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "dataX"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 205
+        },
+        "id": "VyZUErsNhzjX",
+        "outputId": "5a6b9f8f-a589-40d8-fc97-d6dfb0b1203e"
+      },
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "        0         1         2         3         4         5         6    \\\n",
+              "0 -0.999942  0.085678 -0.996896  0.746110 -0.996554 -0.859936 -0.992704   \n",
+              "1 -0.999998  0.036942 -0.997839  0.887041 -0.998038 -0.265437 -0.890874   \n",
+              "\n",
+              "        7         8         9    ...       118       119       120       121  \\\n",
+              "0 -0.951056  0.020912 -0.042193  ...  0.219438 -0.997423  0.088575 -0.999946   \n",
+              "1 -0.823021  0.071199  0.098324  ...  0.101426 -0.999503  0.128037 -0.999978   \n",
+              "\n",
+              "        122       123       124       125       126       127  \n",
+              "0 -0.847873  0.967843 -0.999001  0.981727  0.996131  0.997182  \n",
+              "1 -0.913359  0.858344 -0.999860  0.998909  0.474369  0.981083  \n",
+              "\n",
+              "[2 rows x 128 columns]"
+            ],
+            "text/html": [
+              "\n",
+              "  <div id=\"df-69a4ddf6-7da6-4bf5-9af6-7b075e3ed1a4\">\n",
+              "    <div class=\"colab-df-container\">\n",
+              "      <div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>0</th>\n",
+              "      <th>1</th>\n",
+              "      <th>2</th>\n",
+              "      <th>3</th>\n",
+              "      <th>4</th>\n",
+              "      <th>5</th>\n",
+              "      <th>6</th>\n",
+              "      <th>7</th>\n",
+              "      <th>8</th>\n",
+              "      <th>9</th>\n",
+              "      <th>...</th>\n",
+              "      <th>118</th>\n",
+              "      <th>119</th>\n",
+              "      <th>120</th>\n",
+              "      <th>121</th>\n",
+              "      <th>122</th>\n",
+              "      <th>123</th>\n",
+              "      <th>124</th>\n",
+              "      <th>125</th>\n",
+              "      <th>126</th>\n",
+              "      <th>127</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>-0.999942</td>\n",
+              "      <td>0.085678</td>\n",
+              "      <td>-0.996896</td>\n",
+              "      <td>0.746110</td>\n",
+              "      <td>-0.996554</td>\n",
+              "      <td>-0.859936</td>\n",
+              "      <td>-0.992704</td>\n",
+              "      <td>-0.951056</td>\n",
+              "      <td>0.020912</td>\n",
+              "      <td>-0.042193</td>\n",
+              "      <td>...</td>\n",
+              "      <td>0.219438</td>\n",
+              "      <td>-0.997423</td>\n",
+              "      <td>0.088575</td>\n",
+              "      <td>-0.999946</td>\n",
+              "      <td>-0.847873</td>\n",
+              "      <td>0.967843</td>\n",
+              "      <td>-0.999001</td>\n",
+              "      <td>0.981727</td>\n",
+              "      <td>0.996131</td>\n",
+              "      <td>0.997182</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>-0.999998</td>\n",
+              "      <td>0.036942</td>\n",
+              "      <td>-0.997839</td>\n",
+              "      <td>0.887041</td>\n",
+              "      <td>-0.998038</td>\n",
+              "      <td>-0.265437</td>\n",
+              "      <td>-0.890874</td>\n",
+              "      <td>-0.823021</td>\n",
+              "      <td>0.071199</td>\n",
+              "      <td>0.098324</td>\n",
+              "      <td>...</td>\n",
+              "      <td>0.101426</td>\n",
+              "      <td>-0.999503</td>\n",
+              "      <td>0.128037</td>\n",
+              "      <td>-0.999978</td>\n",
+              "      <td>-0.913359</td>\n",
+              "      <td>0.858344</td>\n",
+              "      <td>-0.999860</td>\n",
+              "      <td>0.998909</td>\n",
+              "      <td>0.474369</td>\n",
+              "      <td>0.981083</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "<p>2 rows × 128 columns</p>\n",
+              "</div>\n",
+              "      <button class=\"colab-df-convert\" onclick=\"convertToInteractive('df-69a4ddf6-7da6-4bf5-9af6-7b075e3ed1a4')\"\n",
+              "              title=\"Convert this dataframe to an interactive table.\"\n",
+              "              style=\"display:none;\">\n",
+              "        \n",
+              "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\"viewBox=\"0 0 24 24\"\n",
+              "       width=\"24px\">\n",
+              "    <path d=\"M0 0h24v24H0V0z\" fill=\"none\"/>\n",
+              "    <path d=\"M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z\"/><path d=\"M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z\"/>\n",
+              "  </svg>\n",
+              "      </button>\n",
+              "      \n",
+              "  <style>\n",
+              "    .colab-df-container {\n",
+              "      display:flex;\n",
+              "      flex-wrap:wrap;\n",
+              "      gap: 12px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert {\n",
+              "      background-color: #E8F0FE;\n",
+              "      border: none;\n",
+              "      border-radius: 50%;\n",
+              "      cursor: pointer;\n",
+              "      display: none;\n",
+              "      fill: #1967D2;\n",
+              "      height: 32px;\n",
+              "      padding: 0 0 0 0;\n",
+              "      width: 32px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert:hover {\n",
+              "      background-color: #E2EBFA;\n",
+              "      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "      fill: #174EA6;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert {\n",
+              "      background-color: #3B4455;\n",
+              "      fill: #D2E3FC;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert:hover {\n",
+              "      background-color: #434B5C;\n",
+              "      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
+              "      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
+              "      fill: #FFFFFF;\n",
+              "    }\n",
+              "  </style>\n",
+              "\n",
+              "      <script>\n",
+              "        const buttonEl =\n",
+              "          document.querySelector('#df-69a4ddf6-7da6-4bf5-9af6-7b075e3ed1a4 button.colab-df-convert');\n",
+              "        buttonEl.style.display =\n",
+              "          google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "\n",
+              "        async function convertToInteractive(key) {\n",
+              "          const element = document.querySelector('#df-69a4ddf6-7da6-4bf5-9af6-7b075e3ed1a4');\n",
+              "          const dataTable =\n",
+              "            await google.colab.kernel.invokeFunction('convertToInteractive',\n",
+              "                                                     [key], {});\n",
+              "          if (!dataTable) return;\n",
+              "\n",
+              "          const docLinkHtml = 'Like what you see? Visit the ' +\n",
+              "            '<a target=\"_blank\" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'\n",
+              "            + ' to learn more about interactive tables.';\n",
+              "          element.innerHTML = '';\n",
+              "          dataTable['output_type'] = 'display_data';\n",
+              "          await google.colab.output.renderOutput(dataTable, element);\n",
+              "          const docLink = document.createElement('div');\n",
+              "          docLink.innerHTML = docLinkHtml;\n",
+              "          element.appendChild(docLink);\n",
+              "        }\n",
+              "      </script>\n",
+              "    </div>\n",
+              "  </div>\n",
+              "  "
+            ]
+          },
+          "metadata": {},
+          "execution_count": 12
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Para tener presente: el modelo original de BERT es muy grande y pesado, por ende, hoy existen diferentes versiones basadas en BERT más pequeñas.\n",
+        "\n",
+        "La versión usada previamente es una de las versiones más pequeñas. Si desea obtener un vector numérico más grande, puede cargar en memoria otra versión, que será más grande y pesado, de la siguiente forma:\n",
+        "\n",
+        "\n",
+        "Reemplace la referencia del modelo BERT utilizado por alguna de las otras opciones disponibles en la página:\n",
+        "\n",
+        "https://tfhub.dev/google/collections/bert\n",
+        "\n",
+        "El número que acompaña a la letra H corresponde a la dimensión del vector que se obtiene. Por ejemplo:\n",
+        "\n",
+        "encoder = hub.load(\"https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-6_H-512_A-8/2\")\n",
+        "\n",
+        "donde en este caso se carga una versión de BERT que devuelve un vector con 512 dimensiones.\n",
+        "\n",
+        "Finalmente, tener presente que BERT solo sirve para textos en inglés. Existen otros modelos que se pueden usar para otros lenguajes."
+      ],
+      "metadata": {
+        "id": "jRVZfOg1h32h"
+      }
+    }
+  ]
+}
