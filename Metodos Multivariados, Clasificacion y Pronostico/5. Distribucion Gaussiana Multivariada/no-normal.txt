@@ -1,0 +1,6 @@
+n<-3000
+X1<-rnorm(n)
+e<-2*rbinom(n, 1, 0.5)-1
+X2<-e*X1
+plot(X1, X2, main="No Gaussian!!")
+

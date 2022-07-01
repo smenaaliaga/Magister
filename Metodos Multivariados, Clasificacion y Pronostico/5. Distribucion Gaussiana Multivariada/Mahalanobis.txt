@@ -1,0 +1,76 @@
+library(mnormt)
+n<-300
+mu <- c(0,0)
+Sigma <- matrix(c(1,0,0,1), 2, 2)
+mat1<-rmnorm(n, mu, Sigma)
+plot(mat1[,1], mat1[,2], main="Gaussian")
+
+Smat1=var(mat1)
+De<-mahalanobis(mat1, center=TRUE, diag(ncol(mat1)))
+#De#distancia euclidiana
+Dm<-mahalanobis(mat1, center=TRUE, Smat1)
+#Dm#distancia de Mahalanobis
+
+#En este caso Mahalanobis es equivalente a Euclidiana
+
+#########################################
+
+n<-300
+mu <- c(0,0)
+Sigma <- matrix(c(1,0.8,0.8,1), 2, 2)
+mat1<-rmnorm(n, mu, Sigma)
+plot(mat1[,1], mat1[,2], main="Gaussian")
+
+Smat1=var(mat1)
+De<-mahalanobis(mat1, center=TRUE, diag(ncol(mat1)))
+#De#distancia euclidiana
+Dm<-mahalanobis(mat1, center=TRUE, Smat1)
+#Dm#distancia de Mahalanobis
+
+#La distancia Euclidiana no toma en cuenta la redundencia de la información
+#Eso puede sugerir de manera falsa que tenemos 
+#puntos que tienen otra naturaleza mientras que es solo
+#el efecto de la correlación
+
+########################################
+
+n<-300
+mu <- c(0,0)
+Sigma <- matrix(c(5,0,0,1), 2, 2)
+mat1<-rmnorm(n, mu, Sigma)
+plot(mat1[,1], mat1[,2], main="Gaussian")
+
+Smat1=var(mat1)
+De<-mahalanobis(mat1, center=TRUE, diag(ncol(mat1)))
+#De#distancia euclidiana
+Dm<-mahalanobis(mat1, center=TRUE, Smat1)
+#Dm#distancia de Mahalanobis
+
+#Lo mismo que el anterior pero por la varianza alta de 
+#la primera variable. La primera variable es sobre representada 
+#en medir la distancia entre dos puntos si ocupamos la distancia euclidiana
+
+################################################
+
+n<-150
+mu <- c(0,0)
+Sigma <- matrix(c(1,0,0,1), 2, 2)
+mat0<-rmnorm(n, mu, Sigma)
+mu <- c(20,0)
+mat00<-rmnorm(n, mu, Sigma)
+
+mat1<-rbind(mat0,mat00)
+plot(mat1[,1], mat1[,2], main="Gaussian")
+
+Smat1=var(mat1)
+Dm<-mahalanobis(mat1, center=TRUE, Smat1)
+#Dm#distancia de Mahalanobis
+
+
+
+#Acá estamos seguros de detectar puntos de 
+#naturaleza diferente y no confundirnos con otros 
+#efectos dado que estamos utilizando la distancia correcta.
+
+
+

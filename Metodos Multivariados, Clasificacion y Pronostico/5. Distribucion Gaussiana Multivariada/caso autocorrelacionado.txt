@@ -1,0 +1,26 @@
+#################
+#autocorrelación#
+#################
+
+u<-rnorm(150)
+eps1<-matrix(0,150,1)
+x<-rnorm(100)*2
+x=abs(x)
+for (i in 2:150){
+eps1[i]=0.8*eps1[i-1]+u[i]
+}
+eps=eps1[51:150]
+y=1+2*x+eps
+
+fit<-lm(y ~ x)
+summary(fit)
+library(lmtest)
+dwtest(fit)
+
+library(nlme)
+
+reggls3<-gls(y ~ x, correlation = corAR1(form = ~ 1))
+summary(reggls3)
+
+reggls4<-gls(y ~ x, correlation=corARMA(p=0, q=2))
+summary(reggls4)
