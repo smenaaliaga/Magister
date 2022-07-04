@@ -3,7 +3,7 @@ install.packages('VGAM')
 library(tidyverse)
 library(VGAM)
 # set working directory
-setwd('~/Desktop')
+setwd('~/Documents/Magister/Modelos Lineales para Clasificación/LR Ordinal')
 
 # DATOS DE POLITICA
 
@@ -91,7 +91,3 @@ library(MASS)
 plr1 <- polr(R4 ~ Th + Age, method = "logistic", data = knee)
 summary(plr1)
 exp(-coef(plr1))
-
-df <-  
-
-predict()
